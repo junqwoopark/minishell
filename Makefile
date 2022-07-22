@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
+#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/19 11:08:44 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/22 12:28:27 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 LIBFTDIR = ./libft
 LIBFTFILE = libft.a
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra
 AR = ar rcs
 RM = rm -f

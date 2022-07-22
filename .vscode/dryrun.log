@@ -1,0 +1,9 @@
+make: Entering directory `/goinfre/junkpark/minishell'
+gcc -Wall -Werror -Wextra -c minishell.c -I.
+make -C ./libft
+cp ./libft/libft.a minishell
+ar rcs minishell minishell.o
+gcc -o minishell minishell
+ 
+make: Leaving directory `/goinfre/junkpark/minishell'
+ 
