@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 13:58:03 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/22 13:58:08 by chukim           ###   ########.fr       */
+/*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
+/*   Updated: 2022/07/22 14:33:14 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	print_error(char *message, int error_code)
+#include "minishell.h"
+
+void	parse(char *input)
 {
-	perror(message);
-	exit(error_code);
+	printf("NO white space [%s]\n", input);
 }

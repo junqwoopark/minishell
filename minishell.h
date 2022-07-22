@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/22 14:11:40 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/22 14:32:22 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ typedef struct s_cmd {
 }	t_cmd;
 
 void	set_signal(void);
+int		check_white_space(char *input);
+void	parse(char *input);
 
 #endif

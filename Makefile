@@ -6,7 +6,7 @@
 #    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/22 14:12:54 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/22 14:32:39 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ RM = rm -f
 
 SRCS = minishell.c \
 		signal.c \
+		util_files.c \
+		parse.c \
 
 OBJS = $(SRCS:.c=.o)
 
