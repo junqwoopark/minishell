@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:50:42 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/22 14:12:18 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/22 14:53:32 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.c"
+#include "minishell.h"
 
 void	handle_signal(int signo)
 {
-	pid_t	pid;
-	int		status;
-
-	pid = waitpid(-1, &status, WNOHANG);
 	if (signo == SIGINT)
 	{
-		if (pid == -1)
-		{
-			
-		}
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 	else if (signo == SIGQUIT)
 	{
-
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
