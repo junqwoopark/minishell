@@ -3,16 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/22 12:28:27 by junkpark         ###   ########.fr        #
+#    Updated: 2022/07/22 14:12:54 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFTDIR = ./libft
-LIBFTFILE = libft.a
+
+INCLUDES =	-I ./readline/include/ \
+			-I ./libft/
+LIBS	 = 	-L ~/goinfre/.brew/opt/readline/lib/ -lreadline \
+			-L ~/goinfre/.brew/opt/readline/lib/ -lhistory \
+			-L ./libft/ -lft
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
@@ -20,17 +25,16 @@ AR = ar rcs
 RM = rm -f
 
 SRCS = minishell.c \
+		signal.c \
 
 OBJS = $(SRCS:.c=.o)
 
 .c.o :
-	$(CC) $(CFLAGS) -c $< -I.
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -I.
 
 $(NAME) : $(OBJS)
 	make -C $(LIBFTDIR)
-	cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
-	$(AR) $@ $?
-	gcc -o $(NAME) $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
 
 all : $(NAME)
 
