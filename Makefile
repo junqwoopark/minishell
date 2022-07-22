@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
+#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/22 15:06:26 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/22 15:16:15 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ LIBFTDIR = ./libft
 
 INCLUDES =	-I ~/goinfre/.brew/opt/readline/include \
 			-I ./libft/
-LIBS	 = 	-L ~/goinfre/.brew/opt/readline/lib/ -lreadline \
-			-L ~/goinfre/.brew/opt/readline/lib/ -lhistory \
+LIBS	 = 	-lreadline -L ~/goinfre/.brew/opt/readline/lib/ \
+			-lhistory -L ~/goinfre/.brew/opt/readline/lib/ \
 			-L ./libft/ -lft
 
 CC = cc

@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/goinfre/junkpark/minishell'
+ 
+make: `minishell' is up to date.
+make: Leaving directory `/goinfre/junkpark/minishell'
+ 
