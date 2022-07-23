@@ -6,7 +6,7 @@
 #    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/22 15:16:15 by junkpark         ###   ########.fr        #
+#    Updated: 2022/07/23 13:35:08 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = minishell
 LIBFTDIR = ./libft
 
 INCLUDES =	-I ~/goinfre/.brew/opt/readline/include \
-			-I ./libft/
+			-I ./libft/ \
+			-I .
 LIBS	 = 	-lreadline -L ~/goinfre/.brew/opt/readline/lib/ \
 			-lhistory -L ~/goinfre/.brew/opt/readline/lib/ \
 			-L ./libft/ -lft
@@ -24,15 +25,15 @@ CFLAGS = -Wall -Werror -Wextra
 AR = ar rcs
 RM = rm -f
 
-SRCS = minishell.c \
+SRCS =	minishell.c \
 		signal.c \
-		util_files.c \
-		parse.c \
+		./parser/util_parse.c \
+		./parser/parse.c
 
 OBJS = $(SRCS:.c=.o)
 
-.c.o :
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -I.
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $^
 
 $(NAME) : $(OBJS)
 	make -C $(LIBFTDIR)

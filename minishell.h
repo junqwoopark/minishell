@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 12:22:56 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/23 13:40:58 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@
 # include "libft/libft.h"
 
 typedef struct s_cmd {
-	char	**cmdline;
-	int		flag;
-	char	quote;
+	int		argc;
+	char	**argv;
+
+	int		read;
+	int		write;
+	char	**path;
 }	t_cmd;
 
 void	set_signal(void);

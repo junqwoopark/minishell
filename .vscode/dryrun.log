@@ -1,10 +1,11 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory `/goinfre/junkpark/minishell'
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c minishell.c -I.
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c signal.c -I.
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c util_files.c -I.
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c parse.c -I.
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o minishell.o minishell.c
+ 
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o signal.o signal.c
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o parser/util_parse.o parser/util_parse.c
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o parser/parse.o parser/parse.c
 make -C ./libft
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -lreadline -L ~/goinfre/.brew/opt/readline/lib/ -lhistory -L ~/goinfre/.brew/opt/readline/lib/ -L ./libft/ -lft minishell.o signal.o util_files.o parse.o -o minishell
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -lreadline -L ~/goinfre/.brew/opt/readline/lib/ -lhistory -L ~/goinfre/.brew/opt/readline/lib/ -L ./libft/ -lft minishell.o signal.o parser/util_parse.o parser/parse.o -o minishell
 make: Leaving directory `/goinfre/junkpark/minishell'
  

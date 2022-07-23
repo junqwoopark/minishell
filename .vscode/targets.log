@@ -6,11 +6,13 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Sat Jul 23 12:19:39 2022
+# Make data base, printed on Sat Jul 23 13:35:12 2022
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -18,7 +20,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # makefile (from `Makefile', line 16)
-INCLUDES = -I ~/goinfre/.brew/opt/readline/include -I ./libft/
+INCLUDES = -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I .
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -27,19 +29,19 @@ INCLUDES = -I ~/goinfre/.brew/opt/readline/include -I ./libft/
 CURDIR := /goinfre/junkpark/minishell
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 25)
+# makefile (from `Makefile', line 26)
 RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 23)
+# makefile (from `Makefile', line 24)
 CFLAGS = -Wall -Werror -Wextra
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 14)
 LIBFTDIR = ./libft
-# makefile (from `Makefile', line 32)
+# makefile (from `Makefile', line 33)
 OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_CWD = /
@@ -47,7 +49,7 @@ VSCODE_CWD = /
 PATH = /Users/junkpark/goinfre/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `Makefile', line 24)
+# makefile (from `Makefile', line 25)
 AR = ar rcs
 # environment
 ELECTRON_RUN_AS_NODE = 1
@@ -85,11 +87,11 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 27)
-SRCS = minishell.c signal.c util_files.c parse.c 
+# makefile (from `Makefile', line 28)
+SRCS = minishell.c signal.c ./parser/util_parse.c ./parser/parse.c
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 22)
+# makefile (from `Makefile', line 23)
 CC = cc
 # default
 MAKE_VERSION := 3.81
@@ -137,10 +139,11 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 18)
+# makefile (from `Makefile', line 19)
 LIBS = -lreadline -L ~/goinfre/.brew/opt/readline/lib/ -lhistory -L ~/goinfre/.brew/opt/readline/lib/ -L ./libft/ -lft
 # automatic
 ^F = $(notdir $^)
+ 
 # default
 SUFFIXES := 
 # default
@@ -150,9 +153,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 8420
+VSCODE_PID = 21263
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=3/98=3%
+# Load=70/1024=7%, Rehash=0, Collisions=3/103=3%
 
 # Pattern-specific Variable Values
 
@@ -160,18 +163,23 @@ VSCODE_PID = 8420
 
 # Directories
 
-# . (device 16777220, inode 1152921500313122085): 11 files, no impossibilities.
+# . (device 16777220, inode 1152921500313122085): 12 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
-# No implicit rules.
+%.o: %.c
+#  commands to execute (from `Makefile', line 36):
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $^
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
 # Not a target:
-util_files.o:
+parser/util_parse.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -181,17 +189,12 @@ all: minishell
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 
 .PHONY: all clean fclean re
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-parse.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -205,37 +208,50 @@ parse.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-22 15:16:15
+#  Last modified 2022-07-23 13:35:08
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-minishell: minishell.o signal.o util_files.o parse.o
+minishell: minishell.o signal.o parser/util_parse.o parser/parse.o
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 38):
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  commands to execute (from `Makefile', line 39):
 	make -C $(LIBFTDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $^ -o $@
 	
 
-# Not a target:
-minishell.o:
+minishell.o: minishell.c
 #  Implicit rule search has been done.
+#  Implicit/static pattern stem: `minishell'
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := minishell.o
+# automatic
+# % := 
+# automatic
+# * := minishell
+# automatic
+# + := minishell.c
+# automatic
+# | := 
+# automatic
+# < := minishell.c
+# automatic
+# ^ := minishell.c
+# automatic
+# ? := minishell.c
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-.c.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 35):
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -I.
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  commands to execute (from `Makefile', line 36):
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $^
 	
 
 fclean: clean
@@ -243,9 +259,10 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 48):
+#  commands to execute (from `Makefile', line 49):
 	make -C $(LIBFTDIR) fclean
 	$(RM) $(NAME)
+ 
 	
 
 # Not a target:
@@ -265,10 +282,25 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 44):
+#  commands to execute (from `Makefile', line 45):
 	make -C $(LIBFTDIR) clean
 	$(RM) $(OBJS)
 	
+
+# Not a target:
+parser/parse.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+minishell.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-23 12:22:50
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 signal.o:
@@ -277,7 +309,7 @@ signal.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=0/39=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/42=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -289,8 +321,6 @@ signal.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Jul 23 12:19:39 2022
+# Finished Make data base on Sat Jul 23 13:35:12 2022
 
  
-make: *** No rule to make target `minishell.o', needed by `minishell'.  Stop.
-
