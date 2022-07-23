@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 14:02:07 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/23 14:44:42 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,21 @@
 # include <signal.h>
 # include <termios.h>
 # include "libft/libft.h"
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
+typedef struct s_token
+{
+	char			*value;
+	int				type;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
 
 typedef struct s_cmd {
 	int		argc;
