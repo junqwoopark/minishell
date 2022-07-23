@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/22 16:15:03 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/23 12:22:50 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit)
 void	init_main(int argc, char **argv, char **envp)
 {
 	struct termios	term;
-	
+
 	if (argc != 1)
 		exit_with_err("argument input error", NULL, 126, 1);
 	tcgetattr(STDIN_FILENO, &term);
@@ -43,7 +43,7 @@ void	init_main(int argc, char **argv, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
-	
+
 	init_main(argc, argv, envp);
 	while (1)
 	{
@@ -56,5 +56,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-execve("/bin/", "ls")

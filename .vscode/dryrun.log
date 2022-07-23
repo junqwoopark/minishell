@@ -1,6 +1,10 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/goinfre/junkpark/minishell'
- 
-make: `minishell' is up to date.
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c minishell.c -I.
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c signal.c -I.
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c util_files.c -I.
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -c parse.c -I.
+make -C ./libft
+cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -lreadline -L ~/goinfre/.brew/opt/readline/lib/ -lhistory -L ~/goinfre/.brew/opt/readline/lib/ -L ./libft/ -lft minishell.o signal.o util_files.o parse.o -o minishell
 make: Leaving directory `/goinfre/junkpark/minishell'
  
