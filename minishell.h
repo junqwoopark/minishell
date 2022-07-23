@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 13:40:58 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/23 14:02:07 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ typedef struct s_cmd {
 void	set_signal(void);
 int		check_white_space(char *input);
 void	parse(char *input);
+char	**get_envp(char *envp[]);
+char	*get_cmd_argv(char *path[], char *cmd);
+void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
 
 #endif

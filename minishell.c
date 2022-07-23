@@ -3,30 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 12:22:50 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/23 14:04:37 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(str1, STDERR_FILENO);
-	if (str2)
-	{
-		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putstr_fd(str2, STDERR_FILENO);
-	}
-	ft_putstr_fd("\n", STDERR_FILENO);
-	if (to_exit)
-		exit(exit_code);
-}
-
-void	init_main(int argc, char **argv, char **envp)
+void	init_main(int argc, char **argv, t_cmd *cmd, char **envp)
 {
 	struct termios	term;
 
@@ -36,15 +22,17 @@ void	init_main(int argc, char **argv, char **envp)
 	term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	set_signal();
+	cmd->path = get_envp(envp);
 	(void)argv;
 	(void)envp;
 }
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_cmd	cmd;
 	char	*input;
 
-	init_main(argc, argv, envp);
+	init_main(argc, argv, &cmd, envp);
 	while (1)
 	{
 		input = readline("minishell $> ");

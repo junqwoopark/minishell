@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/23 13:35:08 by junkpark         ###   ########.fr        #
+#    Updated: 2022/07/23 14:03:19 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ RM = rm -f
 
 SRCS =	minishell.c \
 		signal.c \
+		pipe.c \
+		error.c \
 		./parser/util_parse.c \
 		./parser/parse.c
 
