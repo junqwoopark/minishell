@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_parse.c                                       :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:24:08 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 12:22:25 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/23 21:17:14 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_white_space(char *input)
+char	*ft_strndup(const char *s, size_t n)
 {
-	int	space;
-	int	i;
+	size_t	i;
+	char	*str;
 
-	space = 0;
 	i = 0;
-	if (input[0] == 0)
-		return (1);
-	while (input[i])
+	str = NULL;
+	if (n == 0)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (n + 1));
+	if (str == 0)
+		return (NULL);
+	while (i < n)
 	{
-		if (input[i] == '\r' || input[i] == '\v' || input[i] == '\t'
-			|| input[i] == '\f')
-			return (1);
-		else if (input[i] == ' ')
-			space++;
+		str[i] = s[i];
 		i++;
 	}
-	if (space == (int)ft_strlen(input))
-		return (1);
-	return (0);
+	str[i] = '\0';
+	return (str);
 }

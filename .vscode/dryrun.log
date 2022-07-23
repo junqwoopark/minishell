@@ -1,12 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory `/goinfre/junkpark/intra-uuid-da410df6-f4b9-439b-9da8-8916e48dd0fa-4234066-junkpark'
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o minishell.o minishell.c
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o signal.o signal.c
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o pipe.o pipe.c
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o error.o error.c
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o parser/util_parse.o parser/util_parse.c
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -c -o parser/parse.o parser/parse.c
-make -C ./libft
-cc -Wall -Werror -Wextra -I ~/goinfre/.brew/opt/readline/include -I ./libft/ -I . -lreadline -L ~/goinfre/.brew/opt/readline/lib/ -lhistory -L ~/goinfre/.brew/opt/readline/lib/ -L ./libft/ -lft minishell.o signal.o pipe.o error.o parser/util_parse.o parser/parse.o -o minishell
+make: `minishell' is up to date.
 make: Leaving directory `/goinfre/junkpark/intra-uuid-da410df6-f4b9-439b-9da8-8916e48dd0fa-4234066-junkpark'
  

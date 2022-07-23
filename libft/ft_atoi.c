@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:38:31 by chukim            #+#    #+#             */
-/*   Updated: 2021/11/17 15:59:54 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/23 17:15:48 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c);
 static void	ft_deletespace(char const *str, int *i);
 
 int	ft_atoi(char const *str)
@@ -43,7 +42,7 @@ int	ft_atoi(char const *str)
 	return ((int)res * sign);
 }
 
-static int	ft_isspace(char c)
+int	ft_isspace(char c)
 {
 	if (c == '\n' || c == '\t' || c == '\f' || c == '\r'
 		|| c == '\v' || c == ' ')

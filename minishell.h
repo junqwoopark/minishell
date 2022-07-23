@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 16:12:56 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/23 21:12:50 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@
 # include <signal.h>
 # include <termios.h>
 # include "libft/libft.h"
+
+enum	e_types
+{
+	T_NULL,
+	T_SQUOTES,
+	T_DQUOTES,
+	T_WORD,
+	T_PIPE,
+	T_REDIRECT,
+	T_ERROR
+};
 
 typedef struct s_env
 {
@@ -54,6 +65,7 @@ int		check_white_space(char *input);
 char	**get_envp(char *envp[]);
 char	*get_cmd_argv(char *path[], char *cmd);
 void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
-t_token	*parse(char *input);
+t_token	*parse(char *inputmak);
+char	*ft_strndup(const char *s, size_t n);
 
 #endif
