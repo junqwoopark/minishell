@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 14:04:37 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/23 15:04:51 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,27 @@ void	init_main(int argc, char **argv, t_cmd *cmd, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_cmd	cmd;
 	char	*input;
+	t_cmd	*cmd;
+	t_env	*env;
+	t_token	*token;
 
-	init_main(argc, argv, &cmd, envp);
+	(void) argc;
+	(void) argv;
+	(void) envp;
+	(void) cmd;
+	(void) env;
+	// init_main(argc, argv, &cmd, envp);
 	while (1)
 	{
 		input = readline("minishell $> ");
 		if (input == NULL)
 			break ;
-		if (!check_white_space(input))
-			parse(input);
+		else if (*input != '\0')
+		{
+			add_history(input);
+			token = parse(input);
+		}
 		free(input);
 	}
 	return (0);
