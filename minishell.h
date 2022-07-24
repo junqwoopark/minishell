@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/24 14:24:56 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:02:37 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ enum	e_types
 	T_DQUOTES,
 	T_WORD,
 	T_PIPE,
-	T_REDIRECT,
-	T_ERROR
+	T_REDIRECT = 8,
+	T_ERROR = 16
 };
 
 typedef struct s_env

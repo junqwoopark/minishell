@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/24 14:16:26 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:36:46 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,25 @@ int	main(int argc, char **argv, char **envp)
 			if (token)
 			{
 				// 토큰화 출력 코드!
-				// int	idx = 0;
-				// printf ("str: ");
-				// while (token[idx].str)
-				// {
-				// 	printf("|%s|\t", token[idx].str);
-				// 	idx++;
-				// }
-				// printf ("\ntype: ");
-				// idx = 0;
-				// while (token[idx].type)
-				// {
-				// 	printf("|%d|\t", token[idx].type);
-				// 	idx++;
-				// }
-				// printf("\n");
-				// free_token(&token);
+				int	idx = 0;
+				printf ("str: ");
+				while (token[idx].str)
+				{
+					printf("|%s|\t", token[idx].str);
+					idx++;
+				}
+				printf ("\ntype: ");
+				idx = 0;
+				while (token[idx].type)
+				{
+					printf("|%d|\t", token[idx].type);
+					idx++;
+				}
+				printf("\n");
+				free_token(&token);
 			}
+			else
+				printf("토큰 에러\n");
 		}
 		free(input);
 	}

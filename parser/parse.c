@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/24 17:10:28 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:55:24 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ t_token	*lexcial_analysis(char *input, char *in_quote)
 	return (token);
 }
 
+
 void	init_expanded(char *input, char *in_quote, char *expanded_input, char *expanded_in_quote)
 {
 	while (*input)
@@ -245,6 +246,42 @@ void	init_expanded(char *input, char *in_quote, char *expanded_input, char *expa
 	}
 }
 
+t_token	*syntax_analysis(t_token *token)
+{
+	size_t	i;
+
+	i = 0;
+	while (token[i].str)
+	{
+		if (token[i].type == T_PIPE)
+		{
+			if (token[i + 1].type != T_WORD)
+				token[i].type = T_ERROR;
+		}
+		else if (token[i].type == T_REDIRECT)
+		{
+			if (token[i + 1].type != T_WORD)
+				token[i].type = T_ERROR;
+		}
+		i++;
+	}
+	return (token);
+}
+
+int	is_token_error(t_token *token)
+{
+	size_t	i;
+
+	i = 0;
+	while (token[i].str)
+	{
+		if (token[i].type == T_ERROR)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 // expanded, in_quote 할당 안될 경우 예외처리
 t_token	*parse(char *input)
 {
@@ -261,9 +298,14 @@ t_token	*parse(char *input)
 	init_in_quote(input, in_quote);
 	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
 	token = lexcial_analysis(expanded_input, expanded_in_quote);
+	token = syntax_analysis(token);
+	if (is_token_error(token))
+	{
+		free(token);
+		token = NULL;
+	}
 	free(expanded_in_quote);
 	free(expanded_input);
-	// token =
 	free(in_quote);
 	return (token);
 }
