@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/24 12:24:55 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/24 17:10:28 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ t_token	*label_token(t_token *token)
 }
 
 // get_token 실패 시, return (NULL);
-t_token	*lexcial_analyze(char *input, char *in_quote)
+t_token	*lexcial_analysis(char *input, char *in_quote)
 {
 	t_token *token;
 
@@ -200,7 +200,7 @@ t_token	*lexcial_analyze(char *input, char *in_quote)
 	// while (token[i].str != NULL)
 	// {
 	// 	printf("token[%zu].str is [%s] & token[%zu].type is [%d]\n", i, token[i].str, i, token[i].type);
-	// 	i++;	
+	// 	i++;
 	// }
 	return (token);
 }
@@ -245,6 +245,7 @@ void	init_expanded(char *input, char *in_quote, char *expanded_input, char *expa
 	}
 }
 
+// expanded, in_quote 할당 안될 경우 예외처리
 t_token	*parse(char *input)
 {
 	char	*in_quote;
@@ -259,10 +260,10 @@ t_token	*parse(char *input)
 	expanded_in_quote = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	init_in_quote(input, in_quote);
 	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
-	//printf("input is =[%s]\nin_quote is =[%s]\nexpnaded_input is [%s]\nexpnaded_in_quote is [%s]\n", input, in_quote, expanded_input, expanded_in_quote);
-	token = lexcial_analyze(expanded_input, expanded_in_quote);
-	free(in_quote);
+	token = lexcial_analysis(expanded_input, expanded_in_quote);
 	free(expanded_in_quote);
 	free(expanded_input);
+	// token =
+	free(in_quote);
 	return (token);
 }
