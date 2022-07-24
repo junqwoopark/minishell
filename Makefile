@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/23 20:56:11 by junkpark         ###   ########.fr        #
+#    Updated: 2022/07/24 14:29:26 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,12 @@ RM = rm -f
 
 SRCS =	minishell.c \
 		signal.c \
-		pipe.c \
 		error.c \
+		exec.c \
+		env.c \
 		./parser/parse.c \
 		./parser/parse_utils.c \
+		./builtins/echo.c \
 
 OBJS = $(SRCS:.c=.o)
 

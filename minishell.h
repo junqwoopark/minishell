@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 21:12:50 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/24 14:24:56 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,18 @@ typedef struct s_cmd {
 	char	**path;
 }	t_cmd;
 
-void	set_signal(void);
-int		check_white_space(char *input);
+char	*ft_strndup(const char *s, size_t n);
+
+t_token	*parse(char *inputmak);
+
 char	**get_envp(char *envp[]);
 char	*get_cmd_argv(char *path[], char *cmd);
+char	*get_env(char *envp[], char *key);
+
 void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
-t_token	*parse(char *inputmak);
-char	*ft_strndup(const char *s, size_t n);
+
+void	exec_process(t_token *token);
+
+void	set_signal(void);
 
 #endif

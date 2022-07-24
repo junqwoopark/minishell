@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 21:49:06 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/24 12:24:55 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,12 @@ t_token	*lexcial_analyze(char *input, char *in_quote)
 
 	token = get_token(input, in_quote);
 	token = label_token(token);
+	// size_t	i = 0;
+	// while (token[i].str != NULL)
+	// {
+	// 	printf("token[%zu].str is [%s] & token[%zu].type is [%d]\n", i, token[i].str, i, token[i].type);
+	// 	i++;	
+	// }
 	return (token);
 }
 
@@ -253,6 +259,7 @@ t_token	*parse(char *input)
 	expanded_in_quote = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	init_in_quote(input, in_quote);
 	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
+	//printf("input is =[%s]\nin_quote is =[%s]\nexpnaded_input is [%s]\nexpnaded_in_quote is [%s]\n", input, in_quote, expanded_input, expanded_in_quote);
 	token = lexcial_analyze(expanded_input, expanded_in_quote);
 	free(in_quote);
 	free(expanded_in_quote);

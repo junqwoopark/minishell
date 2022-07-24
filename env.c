@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/23 13:50:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 14:57:17 by junkpark         ###   ########.fr       */
+/*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
+/*   Updated: 2022/07/24 14:26:45 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**get_envp(char *envp[])
 	while (*envp && ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	if (*envp == NULL)
-		exit_with_err("envp error", NULL, 111, 1);
+		exit_with_err("PATH error", NULL, 3, 1);
 	path = *envp + 5;
 	return (ft_split(path, ':'));
 }
@@ -50,5 +50,18 @@ char	*get_cmd_argv(char *path[], char *cmd)
 		i++;
 	}
 	free(path_cmd);
+	return (NULL);
+}
+
+char	*get_env(char *envp[], char *key) //key 값을 넣으면 환경변수를 반환 ex) get_env(envp, "USER") => "chukim"
+{
+	int	i;
+
+	i = -1;
+	while (envp[++i])
+	{
+		if (!ft_strncmp(envp[i], key, ft_strlen(key)))
+			return (envp[i] + ft_strlen(key) + 1);
+	}
 	return (NULL);
 }

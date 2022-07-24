@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 21:48:09 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/24 14:16:26 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) envp;
 	(void) cmd;
 	(void) env;
-	// init_main(argc, argv, &cmd, envp);
+	//init_main(argc, argv, cmd, envp);
 	while (1)
 	{
 		input = readline("minishell $ ");
@@ -80,7 +80,7 @@ int	main(int argc, char **argv, char **envp)
 				// 	idx++;
 				// }
 				// printf("\n");
-				free_token(&token);
+				// free_token(&token);
 			}
 		}
 		free(input);
