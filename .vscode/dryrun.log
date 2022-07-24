@@ -1,5 +1,0 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/goinfre/junkpark/intra-uuid-da410df6-f4b9-439b-9da8-8916e48dd0fa-4234066-junkpark'
-make: `minishell' is up to date.
-make: Leaving directory `/goinfre/junkpark/intra-uuid-da410df6-f4b9-439b-9da8-8916e48dd0fa-4234066-junkpark'
- 
