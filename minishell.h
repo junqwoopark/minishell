@@ -70,6 +70,10 @@ t_token	*parse(char *inputmak);
 char	**get_envp(char *envp[]);
 char	*get_cmd_argv(char *path[], char *cmd);
 char	*get_env(char *envp[], char *key);
+t_env	*env_new();
+void	add_env(t_env *env, char *key, char *value);
+t_env	*copy_env(char *envp[]);
+void	print_env(t_env *env);
 
 void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
 

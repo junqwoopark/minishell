@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 14:18:05 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:32:44 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,10 +284,7 @@ t_token	*env_analysis(t_token *token)
 						j++;
 					}
 					else if (ft_isdigit(token[i].str[k + j]))
-					{
-						while (ft_isdigit(token[i].str[k + j]))
-							j++;
-					}
+						j++;
 					else
 					{
 						while (!ft_isspace(token[i].str[k + j]) && token[i].str[k + j])
