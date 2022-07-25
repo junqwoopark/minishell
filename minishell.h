@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 20:41:39 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 20:48:34 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_cmd {
 	int		read;
 	int		write;
 	int		is_pipe;
-	char	**envp;
+	char	**envp_copy_arr;
 	t_env	*envp_copy;
 }	t_cmd;
 
