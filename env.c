@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 16:54:01 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:22:53 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	add_env(t_env *envp_copy, char *key, char *value)
 	current->next = env_new();
 }
 
+// '='으로 split 했을 경우! 문제 해결할 것인가?
 t_env	*copy_envp(char *envp[])
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 16:53:39 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:06:32 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_token	*parse(char *input, t_env *envp_copy);
 // char	**get_envp(char *envp[]);
 // char	*get_cmd_argv(char *path[], char *cmd);
 char	*get_env(t_env *envp_copy, char *key);
+size_t	get_cnt_of_cmd(t_token *token);
+t_cmd	*get_cmd(t_token *token);
 t_env	*env_new();
 void	add_env(t_env *envp_copy, char *key, char *value);
 t_env	*copy_envp(char *envp[]);

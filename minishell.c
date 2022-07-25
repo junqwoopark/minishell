@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 16:28:46 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:11:45 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	free_token(t_token **token)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
+	// char	**envp_copy_arr;
 	t_cmd	*cmd;
 	t_env	*envp_copy;
 	t_token	*token;
@@ -63,10 +64,15 @@ int	main(int argc, char **argv, char **envp)
 			token = parse(input, envp_copy);
 			if (token)
 			{
+				// envp_copy_arr = get_envp_copy_arr(envp_copy);
+				cmd = get_cmd(token);
+
 				free_token(&token);
 			}
 			else
-				printf("%d\n", g_errno);
+			{
+				// 에러 출력!
+			}
 		}
 		free(input);
 	}

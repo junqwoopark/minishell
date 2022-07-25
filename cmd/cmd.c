@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 20:14:14 by junkpark         ###   ########.fr       */
+/*   Created: 2022/07/25 17:20:09 by junkpark          #+#    #+#             */
+/*   Updated: 2022/07/25 17:48:33 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int	ft_exec(t_token *token, t_cmd *cmd, char **envp_copy_arr)
-// {
-// 	pid_t	pid;
-// 	size_t	i;
-// 	size_t	cnt_of_cmd;
+size_t	get_cnt_of_cmd(t_token *token)
+{
+	size_t	i;
+	size_t	cnt;
 
-// 	i = 0;
-// 	cnt_of_cmd = get_cnt_of_cmd(token);
+	i = 0;
+	cnt = 0;
+	while (token[i].type)
+	{
+		if (token[i].type == T_PIPE)
+			cnt++;
+		i++;
+	}
+	return (cnt + 1);
+}
 
-// 	while (i < cnt_of_cmd)
-// 	{
-// 		pid = fork();
+t_cmd	*get_cmd(t_token *token)
+{
+	t_cmd	*cmd;
 
-// 	}
-// }
+	cmd = ft_calloc(get_cnt_of_cmd(token), sizeof(t_cmd) + 1);
+	return (cmd);
+}

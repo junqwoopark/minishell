@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 16:14:30 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 20:16:12 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,30 +160,33 @@ t_token	*label_token(t_token *token)
 	size_t	i;
 
 	i = 0;
-	while (token[i].str && !token[i].type)
+	while (token[i].str)
 	{
-		if (!ft_strncmp(token[i].str, "|", 2))
-			token[i].type = T_PIPE;
-		else if (!ft_strncmp(token[i].str, "<", 2))
-			token[i].type = T_REDIRECT;
-		else if (!ft_strncmp(token[i].str, "<<", 3))
-			token[i].type = T_REDIRECT;
-		else if (!ft_strncmp(token[i].str, ">", 2))
-			token[i].type = T_REDIRECT;
-		else if (!ft_strncmp(token[i].str, ">>", 3))
-			token[i].type = T_REDIRECT;
-		else if (!ft_strncmp(token[i].str, "||", 3))
-			token[i].type = T_ERROR;
-		else if (!ft_strncmp(token[i].str, "&&", 3))
-			token[i].type = T_ERROR;
-		else if (!ft_strncmp(token[i].str, "&", 2))
-			token[i].type = T_ERROR;
-		else if (!ft_strncmp(token[i].str, ";", 2))
-			token[i].type = T_ERROR;
-		else if (!ft_strncmp(token[i].str, ";;", 3))
-			token[i].type = T_ERROR;
-		else
-			token[i].type = T_WORD;
+		if (token[i].type == T_NULL)
+		{
+			if (!ft_strncmp(token[i].str, "|", 2))
+				token[i].type = T_PIPE;
+			else if (!ft_strncmp(token[i].str, "<", 2))
+				token[i].type = T_REDIRECT;
+			else if (!ft_strncmp(token[i].str, "<<", 3))
+				token[i].type = T_REDIRECT;
+			else if (!ft_strncmp(token[i].str, ">", 2))
+				token[i].type = T_REDIRECT;
+			else if (!ft_strncmp(token[i].str, ">>", 3))
+				token[i].type = T_REDIRECT;
+			else if (!ft_strncmp(token[i].str, "||", 3))
+				token[i].type = T_ERROR;
+			else if (!ft_strncmp(token[i].str, "&&", 3))
+				token[i].type = T_ERROR;
+			else if (!ft_strncmp(token[i].str, "&", 2))
+				token[i].type = T_ERROR;
+			else if (!ft_strncmp(token[i].str, ";", 2))
+				token[i].type = T_ERROR;
+			else if (!ft_strncmp(token[i].str, ";;", 3))
+				token[i].type = T_ERROR;
+			else
+				token[i].type = T_WORD;
+		}
 		i++;
 	}
 	return (token);
