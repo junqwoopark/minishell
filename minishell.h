@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 11:34:11 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:53:39 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ extern int	g_errno;
 
 char	*ft_strndup(const char *s, size_t n);
 
-t_token	*parse(char *inputmak);
+t_token	*parse(char *input, t_env *envp_copy);
 
-char	**get_envp(char *envp[]);
-char	*get_cmd_argv(char *path[], char *cmd);
-char	*get_env(char *envp[], char *key);
+// char	**get_envp(char *envp[]);
+// char	*get_cmd_argv(char *path[], char *cmd);
+char	*get_env(t_env *envp_copy, char *key);
 t_env	*env_new();
-void	add_env(t_env *env, char *key, char *value);
-t_env	*copy_env(char *envp[]);
-void	print_env(t_env *env);
+void	add_env(t_env *envp_copy, char *key, char *value);
+t_env	*copy_envp(char *envp[]);
+void	print_env(t_env *envp_copy);
 
 void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
 

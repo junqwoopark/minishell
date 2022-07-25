@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 14:32:44 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/25 16:14:30 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,8 @@ void	init_expanded(char *input, char *in_quote, char *expanded_input, char *expa
 	}
 }
 
-t_token	*env_analysis(t_token *token)
+// 시간 복잡도 엄청 남, 수정 필요!
+t_token	*env_analysis(t_token *token, t_env *envp_copy)
 {
 	size_t	i;
 	size_t	j;
@@ -254,6 +255,7 @@ t_token	*env_analysis(t_token *token)
 	char	*env;
 	char	*str;
 	char	*tmp;
+	char	*key;
 
 	i = 0;
 	while (token[i].str)
@@ -297,11 +299,13 @@ t_token	*env_analysis(t_token *token)
 						}
 						else
 						{
-							env = "ENV";
+							key = ft_strndup(&(token[i].str[k + 1]), j - 1);
+							env = get_env(envp_copy, key);
 							tmp = str;
 							str = ft_strjoin(str, env);
+							free(key);
+							free(env);
 							free(tmp);
-							// free(env);
 						}
 					}
 				}
@@ -331,6 +335,7 @@ t_token	*env_analysis(t_token *token)
 		}
 		else if (token[i].type == T_SQUOTES)
 			token[i].type = T_WORD;
+		printf("|%s|\n", token[i].str);
 		i++;
 	}
 	return (token);
@@ -373,7 +378,7 @@ int	is_token_error(t_token *token)
 }
 
 // expanded, in_quote 할당 안될 경우 예외처리
-t_token	*parse(char *input)
+t_token	*parse(char *input, t_env *envp_copy)
 {
 	char	*in_quote;
 	char	*expanded_input;
@@ -391,7 +396,7 @@ t_token	*parse(char *input)
 	init_in_quote(input, in_quote);
 	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
 	token = lexcial_analysis(expanded_input, expanded_in_quote);
-	token = env_analysis(token);
+	token = env_analysis(token, envp_copy);
 	token = syntax_analysis(token);
 	if (is_token_error(token))
 	{
