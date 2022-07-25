@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 16:53:39 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 17:15:16 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
 void	exec_process(t_token *token);
 
 void	set_signal(void);
+
+void	ft_echo(t_cmd *cmd);
 
 #endif
