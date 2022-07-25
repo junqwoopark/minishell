@@ -6,11 +6,13 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/24 18:36:46 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 12:17:42 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_errno;
 
 void	init_main(int argc, char **argv, t_cmd *cmd, char **envp)
 {
@@ -64,26 +66,10 @@ int	main(int argc, char **argv, char **envp)
 			token = parse(input);
 			if (token)
 			{
-				// 토큰화 출력 코드!
-				int	idx = 0;
-				printf ("str: ");
-				while (token[idx].str)
-				{
-					printf("|%s|\t", token[idx].str);
-					idx++;
-				}
-				printf ("\ntype: ");
-				idx = 0;
-				while (token[idx].type)
-				{
-					printf("|%d|\t", token[idx].type);
-					idx++;
-				}
-				printf("\n");
 				free_token(&token);
 			}
 			else
-				printf("토큰 에러\n");
+				printf("%d\n", g_errno);
 		}
 		free(input);
 	}

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/24 18:55:24 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 14:18:05 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,99 @@ void	init_expanded(char *input, char *in_quote, char *expanded_input, char *expa
 	}
 }
 
+t_token	*env_analysis(t_token *token)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	char	*env;
+	char	*str;
+	char	*tmp;
+
+	i = 0;
+	while (token[i].str)
+	{
+		if (token[i].type == T_DQUOTES)
+			token[i].type = T_WORD;
+		if (token[i].type == T_WORD)
+		{
+			k = 0;
+			str = ft_strdup("");
+			while (token[i].str[k])
+			{
+				j = 0;
+				if (token[i].str[j + k] == '$')
+				{
+					token[i].str[j + k] = '\0';
+					tmp = str;
+					str = ft_strjoin(str, &(token[i].str[k]));
+					free(tmp);
+					j++;
+					if (token[i].str[k + j] == '?')
+					{
+						env = ft_itoa(g_errno);
+						tmp = str;
+						str = ft_strjoin(str, env);
+						free(tmp);
+						free(env);
+						j++;
+					}
+					else if (ft_isdigit(token[i].str[k + j]))
+					{
+						while (ft_isdigit(token[i].str[k + j]))
+							j++;
+					}
+					else
+					{
+						while (!ft_isspace(token[i].str[k + j]) && token[i].str[k + j])
+							j++;
+						if (j == 1)
+						{
+							tmp = str;
+							str = ft_strjoin(str, "$");
+							free(tmp);
+						}
+						else
+						{
+							env = "ENV";
+							tmp = str;
+							str = ft_strjoin(str, env);
+							free(tmp);
+							// free(env);
+						}
+					}
+				}
+				else
+				{
+					while (token[i].str[k + j] && token[i].str[k + j] != '$')
+						j++;
+					if (token[i].str[k + j] == '$')
+					{
+						token[i].str[k + j] = '\0';
+						tmp = str;
+						str = ft_strjoin(str, &(token[i].str[k]));
+						free(tmp);
+						token[i].str[k + j] = '$';
+					}
+					else
+					{
+						tmp = str;
+						str = ft_strjoin(str, &(token[i].str[k]));
+						free(tmp);
+					}
+				}
+				k += j;
+			}
+			free(token[i].str);
+			token[i].str = str;
+		}
+		else if (token[i].type == T_SQUOTES)
+			token[i].type = T_WORD;
+		i++;
+	}
+	return (token);
+}
+
 t_token	*syntax_analysis(t_token *token)
 {
 	size_t	i;
@@ -291,18 +384,23 @@ t_token	*parse(char *input)
 	t_token	*token;
 
 	if (!is_valid_quote(input))
+	{
+		g_errno = -1;
 		return (NULL);
+	}
 	in_quote = ft_calloc(ft_strlen(input) + 1, 1);
 	expanded_input = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	expanded_in_quote = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	init_in_quote(input, in_quote);
 	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
 	token = lexcial_analysis(expanded_input, expanded_in_quote);
+	token = env_analysis(token);
 	token = syntax_analysis(token);
 	if (is_token_error(token))
 	{
 		free(token);
 		token = NULL;
+		g_errno = -1;
 	}
 	free(expanded_in_quote);
 	free(expanded_input);

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/24 18:02:37 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:34:11 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ typedef struct s_cmd {
 	int		read;
 	int		write;
 	char	**path;
+	int		is_pipe;
 }	t_cmd;
+
+extern int	g_errno;
 
 char	*ft_strndup(const char *s, size_t n);
 
