@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 13:11:26 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:18:31 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ enum	e_types
 	T_DQUOTES,
 	T_WORD,
 	T_PIPE,
-	T_REDIRECT = 8,
-	T_ERROR = 16
+	T_REDIRECT,
+	T_FILE,
+	T_ERROR,
 };
 
 typedef struct s_env
@@ -71,6 +72,7 @@ t_token	*parse(char *input, t_env *envp_copy);
 
 // char	**get_envp(char *envp[]);
 // char	*get_cmd_argv(char *path[], char *cmd);
+char	**get_envp_copy_arr(t_env *envp_copy);
 char	*get_env(t_env *envp_copy, char *key);
 size_t	get_cnt_of_cmd(t_token *token);
 t_cmd	*get_cmd(t_token *token);

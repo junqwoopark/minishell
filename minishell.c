@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 20:47:17 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:08:33 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,38 @@ void	free_token(t_token **token)
 		free((*token)[i].str);
 		i++;
 	}
+	free((*token)[i].str);
 	free(*token);
+}
+
+void	free_envp_copy_arr(char ***envp_copy_arr)
+{
+	size_t	i;
+
+	i = 0;
+	while ((*envp_copy_arr)[i])
+	{
+		free((*envp_copy_arr)[i]);
+		i++;
+	}
+	free((*envp_copy_arr)[i]);
+	free((*envp_copy_arr));
+}
+
+void	free_cmd(t_cmd **cmd)
+{
+	free(*cmd);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
-	// char	**envp_copy_arr;
+	char	**envp_copy_arr;
 	t_cmd	*cmd;
 	t_env	*envp_copy;
 	t_token	*token;
 
-	(void) argc;
-	(void) argv;
-	(void) cmd;
-	(void) envp;
+	(void)argv;
 	init_terminal(argc);
 	envp_copy = copy_envp(envp);
 	while (1)
@@ -64,10 +81,12 @@ int	main(int argc, char **argv, char **envp)
 			token = parse(input, envp_copy);
 			if (token)
 			{
-				// envp_copy_arr = get_envp_copy_arr(envp_copy);
+				envp_copy_arr = get_envp_copy_arr(envp_copy);
 				cmd = get_cmd(token);
 
 				free_token(&token);
+				free_envp_copy_arr(&envp_copy_arr);
+				free_cmd(&cmd);
 			}
 			else
 			{

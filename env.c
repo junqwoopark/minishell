@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 18:22:53 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:47:24 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,72 @@
 // 	return (NULL);
 // }
 
+size_t	get_envp_copy_size(t_env *envp_copy)
+{
+	size_t	size;
+	t_env	*current;
+
+	size = 0;
+	current = envp_copy;
+	while (current->next)
+	{
+		size++;
+		current = current->next;
+	}
+	return (size);
+}
+
+char	**set_envp_copy_arr(char **envp_copy_arr, t_env *envp_copy)
+{
+	size_t	i;
+	size_t	len;
+	t_env	*current;
+
+	current = envp_copy;
+	i = 0;
+	while (current->next)
+	{
+		len = ft_strlen(current->key) + ft_strlen(current->value);
+		envp_copy_arr[i] = ft_calloc(len + 2, sizeof(char *));
+		ft_strlcat(envp_copy_arr[i], current->key, len + 2);
+		ft_strlcat(envp_copy_arr[i], "=", len + 2);
+		ft_strlcat(envp_copy_arr[i], current->value, len + 2);
+		i++;
+		current = current->next;
+	}
+	return (envp_copy_arr);
+}
+
+char	**get_envp_copy_arr(t_env *envp_copy)
+{
+	size_t	envp_copy_size;
+	char	**envp_copy_arr;
+
+	envp_copy_size = get_envp_copy_size(envp_copy);
+	envp_copy_arr = ft_calloc(envp_copy_size + 1, sizeof(char *));
+	envp_copy_arr = set_envp_copy_arr(envp_copy_arr, envp_copy);
+
+	// size_t	to_print = 0;
+	// while (envp_copy_arr[to_print])
+	// {
+	// 	printf("%s\n", envp_copy_arr[to_print]);
+	// 	to_print++;
+	// }
+	return (envp_copy_arr);
+}
+
 char	*get_env(t_env *envp_copy, char *key) // key 값을 넣으면 환경변수를 반환 ex) get_env(envp, "USER") => "chukim"
 {
+	size_t	len;
 	t_env	*current;
 
 	current = envp_copy;
 	while (current->next != NULL)
 	{
-		if (ft_strncmp(current->key, key, ft_strlen(key)) == 0)
+		len = ft_strlen(key);
+		if (len < ft_strlen(current->key))
+			len = ft_strlen(current->key);
+		if (ft_strncmp(current->key, key, len) == 0)
 			return (ft_strdup(current->value));
 		current = current -> next;
 	}

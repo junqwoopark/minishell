@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 21:31:15 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:18:53 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,16 @@ void	init_in_quote(char *input, char *in_quote)
 	dquote = 0;
 	while (*input)
 	{
-		if (*input == '\'' && (squote == 0 && dquote == 0))
+		if (((*input == '\'' && *(input + 1) == '\'')
+			|| (*input == '\"' && *(input + 1) == '\"'))
+			&& (squote == 0 && dquote == 0))
+		{
+			*in_quote = 3;
+			*(in_quote + 1) = 3;
+			*input = ' ';
+			*(input + 1) = ' ';
+		}
+		else if (*input == '\'' && (squote == 0 && dquote == 0))
 		{
 			squote = 1;
 			*input = ' ';
@@ -116,19 +125,29 @@ t_token	*get_token(char *input, char *in_quote)
 	size_t	j;
 
 	j = 0;
-	token_size = get_token_size(input,in_quote);
-	token = calloc(sizeof(t_token),  token_size + 1);
+	token_size = get_token_size(input, in_quote);
+	printf("%zu\n", token_size);
+	token = ft_calloc(sizeof(t_token),  token_size + 1);
 	if (token == NULL)
 		return (NULL);
 	while (*input)
 	{
+		if (in_quote[i] == 3)
+		{
+			token[j].str = ft_strdup("");
+			i += 2;
+			j += 1;
+			input += i;
+			in_quote += i;
+			continue ;
+		}
 		while (ft_isspace(*input) && !*in_quote)
 		{
 			input++;
 			in_quote++;
 		}
 		i = 0;
-		while (input[i] && in_quote[i])
+		while (input[i] && in_quote[i] && in_quote[i] != 3)
 			i++;
 		if (i != 0)
 		{
@@ -150,6 +169,7 @@ t_token	*get_token(char *input, char *in_quote)
 			in_quote += i;
 		}
 	}
+
 	token[token_size].str = NULL;
 	token[token_size].type = T_NULL;
 	return (token);
@@ -359,7 +379,17 @@ t_token	*syntax_analysis(t_token *token)
 		{
 			if (token[i + 1].type != T_WORD)
 				token[i].type = T_ERROR;
+			else if (token[i + 1].type != T_NULL)
+				token[i + 1].type = T_FILE;
 		}
+		if (token[i].type == T_WORD)
+			printf("word\t|%s|\n", token[i].str);
+		else if (token[i].type == T_FILE)
+			printf("file\t|%s|\n", token[i].str);
+		else if (token[i].type == T_ERROR)
+			printf("error\t|%s|\n", token[i].str);
+		else if (token[i].type == T_PIPE)
+			printf("pipe\t|%s|\n", token[i].str);
 		i++;
 	}
 	return (token);
