@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 16:50:04 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:34:17 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ t_env	*copy_envp(char *envp[])
 	{
 		ret = divide_with_equal(envp[i]);
 		add_env(envp_copy, ret[0], ret[1]);
+		free(ret);
 		i++;
 	}
 	return (envp_copy);

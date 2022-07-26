@@ -6,7 +6,7 @@
 #    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/26 16:39:44 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/26 18:24:00 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS =	minishell.c \
 		./parser/parse_utils.c \
 		./builtins/echo.c \
 		./builtins/export.c \
+		./builtins/unset.c \
 		./cmd/cmd.c
 
 OBJS = $(SRCS:.c=.o)
