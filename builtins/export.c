@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:36:19 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 17:00:41 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:31:13 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ void	add_or_update_env(char *str, t_env *envp)
 	current = envp;
 	while (current != NULL)
 	{
-		if (ft_strncmp(envp->key, key_value[0], ft_strlen(key_value[0])) == 0)
+		if (ft_strcmp(envp->key, key_value[0]) == 0)
 		{
 			free(envp->key);
 			free(envp->value);
 			envp->key = key_value[0];
 			envp->value = key_value[1];
+			free(key_value);
 			return ;
 		}
 		current = current->next;

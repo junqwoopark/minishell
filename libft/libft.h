@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:33:35 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 17:16:02 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 20:36:01 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_isspace(char c);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 16:49:35 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:20:14 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ enum	e_types
 	T_PIPE,
 	T_REDIRECT,
 	T_FILE,
-	T_ERROR,
+	T_ERROR
 };
 
 typedef struct s_env
@@ -58,13 +58,20 @@ typedef struct s_cmd {
 
 	int		read;
 	int		write;
-	int		is_pipe;
 	char	**envp_copy_arr;
 	t_env	*envp_copy;
 	t_token	*token;
 }	t_cmd;
 
 extern int	g_errno;
+
+// free.c
+void	free_token(t_token **token);
+void	free_envp_copy_arr(char ***envp_copy_arr);
+void	free_cmd(t_cmd **cmd);
+
+// exec.c
+void	ft_exec(t_token *token, t_cmd *cmd);
 
 char	*ft_strndup(const char *s, size_t n);
 
@@ -74,8 +81,8 @@ t_token	*parse(char *input, t_env *envp_copy);
 // char	*get_cmd_argv(char *path[], char *cmd);
 char	**get_envp_copy_arr(t_env *envp_copy);
 char	*get_env(t_env *envp_copy, char *key);
-size_t	get_cnt_of_cmd(t_token *token);
-t_cmd	*get_cmd(t_token *token);
+size_t	get_cnt_of_cmd(t_cmd *cmd);
+t_cmd	*get_cmd(t_token *token, t_env *envp_copy, char **envp_copy_arr);
 t_env	*env_new();
 void	add_env(t_env *envp_copy, char *key, char *value);
 t_env	*copy_envp(char *envp[]);

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 18:06:32 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 20:14:54 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,7 +431,7 @@ t_token	*parse(char *input, t_env *envp_copy)
 	token = syntax_analysis(token);
 	if (is_token_error(token))
 	{
-		free(token);
+		free_token(&token);
 		token = NULL;
 		g_errno = -1;
 	}

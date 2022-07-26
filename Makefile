@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
+#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/26 16:39:44 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/26 20:21:16 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS =	minishell.c \
 		error.c \
 		exec.c \
 		env.c \
+		free.c \
 		./parser/parse.c \
 		./parser/parse_utils.c \
 		./builtins/echo.c \

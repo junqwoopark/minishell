@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 16:50:04 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 19:28:19 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ char	**divide_with_equal(char *str)
 	char	**ret;
 
 	i = 0;
-	ret = calloc(2, sizeof(char *));
+	ret = ft_calloc(2, sizeof(char *));
 	while (str[i] != '=' && str[i] != '\0')
 		i++;
 	ret[0] = ft_calloc(i + 1, sizeof(char));
@@ -195,6 +195,7 @@ t_env	*copy_envp(char *envp[])
 		ret = divide_with_equal(envp[i]);
 		add_env(envp_copy, ret[0], ret[1]);
 		i++;
+		free(ret);
 	}
 	return (envp_copy);
 }

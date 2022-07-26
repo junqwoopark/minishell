@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 16:50:40 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:27:00 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,6 @@ void	init_terminal(int argc)
 	term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	set_signal();
-}
-
-void	free_token(t_token **token)
-{
-	size_t	i;
-
-	i = 0;
-	while ((*token)[i].str)
-	{
-		free((*token)[i].str);
-		i++;
-	}
-	free((*token)[i].str);
-	free(*token);
-}
-
-void	free_envp_copy_arr(char ***envp_copy_arr)
-{
-	size_t	i;
-
-	i = 0;
-	while ((*envp_copy_arr)[i])
-	{
-		free((*envp_copy_arr)[i]);
-		i++;
-	}
-	free((*envp_copy_arr)[i]);
-	free((*envp_copy_arr));
-}
-
-void	free_cmd(t_cmd **cmd)
-{
-	free(*cmd);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -82,11 +49,11 @@ int	main(int argc, char **argv, char **envp)
 			if (token)
 			{
 				envp_copy_arr = get_envp_copy_arr(envp_copy);
-				cmd = get_cmd(token);
-
+				cmd = get_cmd(token, envp_copy, envp_copy_arr);
+				ft_exec(token, cmd);
+				free_cmd(&cmd);
 				free_token(&token);
 				free_envp_copy_arr(&envp_copy_arr);
-				free_cmd(&cmd);
 			}
 			else
 			{
