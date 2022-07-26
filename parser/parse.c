@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 20:16:12 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/25 21:31:15 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,7 +338,6 @@ t_token	*env_analysis(t_token *token, t_env *envp_copy)
 		}
 		else if (token[i].type == T_SQUOTES)
 			token[i].type = T_WORD;
-		printf("|%s|\n", token[i].str);
 		i++;
 	}
 	return (token);
