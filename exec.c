@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 22:34:54 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:40:55 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,8 @@ void	ft_exec(t_token *token, t_cmd *cmd)
 		}
 		i++;
 	}
-	// 수정하기!!!
 	waitpid(pid, &g_errno, 0);
-	if (WIFEXITED(g_errno))
+	if (WIFEXITED(g_errno)) // 수정하기!!!
 		g_errno = WEXITSTATUS(g_errno);
 }
 

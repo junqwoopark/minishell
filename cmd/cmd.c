@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 17:20:09 by junkpark          #+#    #+#             */
-/*   Updated: 2022/07/26 20:29:26 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:47:41 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,25 +102,23 @@ t_cmd	*get_cmd(t_token *token, t_env *envp_copy, char **envp_copy_arr)
 		cmd[i].token = &(token[j]);
 		cmd[i].envp_copy = envp_copy;
 		cmd[i].envp_copy_arr = envp_copy_arr;
-		cmd = set_argc(cmd);
-		cmd = set_argv(cmd);
-
-		// to_print!!!
-		// int	x = 0, y;
-		// while (cmd[x].token)
-		// {
-		// 	printf("-----cmd[%d] : argc = %d-----\n", x, cmd[x].argc);
-		// 	y = 0;
-		// 	while (cmd[x].argv[y])
-		// 	{
-		// 		printf("|%s|\n", cmd[x].argv[y]);
-		// 		y++;
-		// 	}
-		// 	x++;
-		// }
-
 		j += k;
 		i++;
 	}
+	cmd = set_argc(cmd);
+	cmd = set_argv(cmd);
+	// // to_print!!!
+	// int	x = 0, y;
+	// while (cmd[x].token)
+	// {
+	// 	printf("-----cmd[%d] : argc = %d-----\n", x, cmd[x].argc);
+	// 	y = 0;
+	// 	while (cmd[x].argv[y])
+	// 	{
+	// 		printf("|%s|\n", cmd[x].argv[y]);
+	// 		y++;
+	// 	}
+	// 	x++;
+	// }
 	return (cmd);
 }

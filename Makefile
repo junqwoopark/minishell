@@ -6,7 +6,7 @@
 #    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/26 20:21:16 by junkpark         ###   ########.fr        #
+#    Updated: 2022/07/26 22:37:31 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS =	minishell.c \
 		./parser/parse_utils.c \
 		./builtins/echo.c \
 		./builtins/export.c \
+		./builtins/unset.c \
 		./cmd/cmd.c
 
 OBJS = $(SRCS:.c=.o)
