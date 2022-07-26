@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/25 20:47:17 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:38:37 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ int	main(int argc, char **argv, char **envp)
 	(void) envp;
 	init_terminal(argc);
 	envp_copy = copy_envp(envp);
+	cmd = (t_cmd *)malloc(sizeof(t_cmd) * 1);
+	cmd->argc = 3;
+	cmd->argv = malloc(sizeof(char *) * 4);
+	cmd->argv[0] = "export";
+	cmd->argv[1] = "GGSD=sdad";
+	cmd->argv[2] = "HELLO= hiasd";
+	cmd->argv[3] = NULL;
+	cmd->read = 0;
+	cmd->write = 0;
+	cmd->envp_copy_arr = envp;
+	cmd->is_pipe = 0;
+	cmd->envp_copy = envp_copy;
+	ft_export(cmd);
+	print_env(cmd->envp_copy);
 	while (1)
 	{
 		input = readline("minishell $ ");

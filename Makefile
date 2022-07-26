@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/25 17:20:42 by junkpark         ###   ########.fr        #
+#    Updated: 2022/07/26 16:39:44 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS =	minishell.c \
 		./parser/parse.c \
 		./parser/parse_utils.c \
 		./builtins/echo.c \
+		./builtins/export.c \
 		./cmd/cmd.c
 
 OBJS = $(SRCS:.c=.o)
