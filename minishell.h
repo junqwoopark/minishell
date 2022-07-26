@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 15:18:31 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:49:35 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,14 @@ t_env	*env_new();
 void	add_env(t_env *envp_copy, char *key, char *value);
 t_env	*copy_envp(char *envp[]);
 void	print_env(t_env *envp_copy);
+char	**divide_with_equal(char *str);
 
 void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
 
 void	exec_process(t_token *token);
 
 void	set_signal(void);
+
+void	ft_export(t_cmd *cmd);
 
 #endif

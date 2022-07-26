@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 14:47:24 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:50:04 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,30 +150,53 @@ void	add_env(t_env *envp_copy, char *key, char *value)
 	current->next = env_new();
 }
 
+char	**divide_with_equal(char *str)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	**ret;
+
+	i = 0;
+	ret = calloc(2, sizeof(char *));
+	while (str[i] != '=' && str[i] != '\0')
+		i++;
+	ret[0] = ft_calloc(i + 1, sizeof(char));
+	ret[1] = ft_calloc(ft_strlen(str) - i, sizeof(char));
+	j = -1;
+	while (++j < i)
+		ret[0][j] = str[j];
+	if (ft_strlen(str) - i == 0)
+		{
+			ret[1] = "\0";
+			return (ret);
+		}
+	k = 0;
+	while (str[j + 1] != '\0')
+	{
+		ret[1][k] = str[j + 1];
+		j++;
+		k++;
+	}
+	return (ret);
+}
+
 // '='으로 split 했을 경우! 문제 해결할 것인가?
 t_env	*copy_envp(char *envp[])
 {
-	size_t	i;
-	size_t	j;
-	t_env	*new;
-	char	**temp;
+	int		i;
+	char	**ret;
+	t_env	*envp_copy;
 
-	new = env_new();
+	envp_copy = env_new();
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		temp = ft_split(envp[i], '=');
-		add_env(new, ft_strdup(temp[0]), ft_strdup(temp[1]));
-		j = 0;
-		while (temp[j])
-		{
-			free(temp[j]);
-			j++;
-		}
-		free(temp);
+		ret = divide_with_equal(envp[i]);
+		add_env(envp_copy, ret[0], ret[1]);
 		i++;
 	}
-	return (new);
+	return (envp_copy);
 }
 
 void	print_env(t_env *envp_copy)
