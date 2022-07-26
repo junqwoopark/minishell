@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:36:19 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 16:37:00 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/26 17:00:41 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,17 @@ void	add_or_update_env(char *str, t_env *envp)
 	t_env	*current;
 	char	**key_value;
 
-	key_value = calloc(2, sizeof(char *));
 	key_value = divide_with_equal(str);
 	current = envp;
 	while (current != NULL)
 	{
 		if (ft_strncmp(envp->key, key_value[0], ft_strlen(key_value[0])) == 0)
 		{
+			free(envp->key);
+			free(envp->value);
 			envp->key = key_value[0];
 			envp->value = key_value[1];
+			return ;
 		}
 		current = current->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 16:52:46 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:06:32 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ t_token	*get_token(char *input, char *in_quote)
 
 	j = 0;
 	token_size = get_token_size(input, in_quote);
-	printf("%zu\n", token_size);
 	token = ft_calloc(sizeof(t_token),  token_size + 1);
 	if (token == NULL)
 		return (NULL);
