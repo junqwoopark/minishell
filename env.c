@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 22:39:42 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:37:40 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,16 +198,4 @@ t_env	*copy_envp(char *envp[])
 		i++;
 	}
 	return (envp_copy);
-}
-
-void	print_env(t_env *envp_copy)
-{
-	t_env	*current;
-
-	current = envp_copy;
-	while (current->next != NULL)
-	{
-		printf("[key = %s] [value = %s]\n", current->key, current->value);
-		current = current->next;
-	}
 }
