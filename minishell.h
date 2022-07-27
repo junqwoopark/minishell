@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 22:37:13 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:44:11 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ size_t	get_cnt_of_cmd(t_cmd *cmd);
 t_cmd	*get_cmd(t_token *token, t_env *envp_copy, char **envp_copy_arr);
 t_env	*env_new();
 void	add_env(t_env *envp_copy, char *key, char *value);
+void	add_or_update_env(char *str, t_env *envp);
 t_env	*copy_envp(char *envp[]);
-void	print_env(t_env *envp_copy);
 char	**divide_with_equal(char *str);
 
 void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
@@ -98,5 +98,13 @@ void	set_signal(void);
 void	ft_export(t_cmd *cmd);
 
 void	ft_unset(t_cmd *cmd);
+
+void	ft_env(t_env *envp_copy);
+
+void	ft_pwd(t_cmd *cmd);
+
+void	ft_echo(t_cmd *cmd);
+
+void	ft_cd(t_cmd *cmd);
 
 #endif
