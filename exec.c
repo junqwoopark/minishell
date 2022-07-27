@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 20:35:54 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:23:00 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	redirection_in(t_cmd *cmd)
 	while (cmd->token[i].type)
 	{
 		if (cmd->token[i].type == T_REDIRECT
-			&& ft_strcmp(cmd->token[i].str, "<") == 0)
+			&& (ft_strcmp(cmd->token[i].str, "<") == 0
+			|| ft_strcmp(cmd->token[i].str, "<<")))
 		{
 			close(cmd->read);
 			fd = open(cmd->token[i + 1].str, O_RDONLY);
@@ -176,8 +177,7 @@ void	ft_exec(t_cmd *cmd)
 	}
 	while (wait(&g_errno) != -1)
 		;
-	//{
-	//	if (WIFEXITED(g_errno))
-	//		g_errno = WEXITSTATUS(g_errno);
-	//}
+	if (WIFEXITED(g_errno))
+		g_errno = WEXITSTATUS(g_errno);
+
 }
