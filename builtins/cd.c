@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 13:36:11 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/27 15:48:30 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,19 @@ void	cd_home(t_cmd *cmd)
 {
 	char *path;
 
-	if (cmd->argv[1][1] == '~')
-		exit_with_err("cd", "No such file or directory", 2, 0);
 	path = get_env(cmd->envp_copy, "HOME");
-	if (chdir(path) == -1)
-		exit_with_err("cd", "HOME not set", 2, 0);
+	if (cmd->argv[1] == NULL)
+	{
+		if (chdir(path) == -1)
+			exit_with_err("cd", "HOME not set", 2, 0);
+	}
+	else if (cmd->argv[1][1] == '~')
+		exit_with_err("cd", "No such file or directory", 2, 0);
+	else
+	{
+		if (chdir(getenv("HOME")) == -1)
+			exit_with_err("cd",  "No such file or directory", 2, 0);
+	}
 }
 
 void	cd_env(t_cmd *cmd)
@@ -58,7 +66,9 @@ void	ft_cd(t_cmd *cmd)
 		set_pwd(cmd->envp_copy);
 	}
 	else if (cmd->argv[1] == NULL || cmd->argv[1][0] == '~')
+	{
 		cd_home(cmd);
+	}
 	else if (cmd->argv[1][0] == '$')
 		cd_env(cmd);
 }
