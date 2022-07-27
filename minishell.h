@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 22:37:13 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:19:33 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ enum	e_types
 	T_FILE,
 	T_ERROR
 };
+
+# define READ 0
+# define WRITE 1
 
 typedef struct s_env
 {
@@ -71,7 +74,7 @@ void	free_envp_copy_arr(char ***envp_copy_arr);
 void	free_cmd(t_cmd **cmd);
 
 // exec.c
-void	ft_exec(t_token *token, t_cmd *cmd);
+void	ft_exec(t_cmd *cmd);
 
 char	*ft_strndup(const char *s, size_t n);
 

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/26 20:14:54 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:32:00 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,10 +308,13 @@ t_token	*env_analysis(t_token *token, t_env *envp_copy)
 						j++;
 					}
 					else if (ft_isdigit(token[i].str[k + j]))
-						j++;
+					{
+						while (ft_isdigit(token[i].str[k + j]))
+							j++;
+					}
 					else
 					{
-						while (!ft_isspace(token[i].str[k + j]) && token[i].str[k + j])
+						while (!ft_isspace(token[i].str[k + j]) && (ft_isalnum(token[i].str[k + j]) || token[i].str[k + j] == '_'))
 							j++;
 						if (j == 1)
 						{
