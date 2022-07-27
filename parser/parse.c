@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 14:32:00 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/27 20:56:13 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,7 +374,8 @@ t_token	*syntax_analysis(t_token *token)
 	{
 		if (token[i].type == T_PIPE)
 		{
-			if (token[i + 1].type != T_WORD)
+			if (token[i + 1].type != T_WORD
+				&& token[i + 1].type != T_REDIRECT)
 				token[i].type = T_ERROR;
 		}
 		else if (token[i].type == T_REDIRECT)
