@@ -6,7 +6,7 @@
 #    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/28 11:28:03 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/28 13:20:57 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ SRCS =	minishell.c \
 		signal.c \
 		error.c \
 		exec.c \
-		env.c \
 		free.c \
 		print.c \
+		./env/env.c \
+		./env/env_utils.c \
 		./parser/parse.c \
 		./parser/parse_utils.c \
 		./builtins/echo.c \
@@ -40,6 +41,7 @@ SRCS =	minishell.c \
 		./builtins/cd.c \
 		./builtins/env.c \
 		./builtins/pwd.c \
+		./builtins/exit.c \
 		./cmd/cmd.c \
 
 OBJS = $(SRCS:.c=.o)
