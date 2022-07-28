@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 15:48:30 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/28 11:26:10 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_pwd(t_env *envp)
 
 void	cd_home(t_cmd *cmd)
 {
-	char *path;
+	char	*path;
 
 	path = get_env(cmd->envp_copy, "HOME");
 	if (cmd->argv[1] == NULL)
@@ -42,13 +42,14 @@ void	cd_home(t_cmd *cmd)
 	else
 	{
 		if (chdir(getenv("HOME")) == -1)
-			exit_with_err("cd",  "No such file or directory", 2, 0);
+			exit_with_err("cd", "No such file or directory", 2, 0);
 	}
 }
 
 void	cd_env(t_cmd *cmd)
 {
 	char	*path;
+
 	path = get_env(cmd->envp_copy, &(cmd->argv[1][1]));
 	if (chdir(path) == -1)
 		chdir(get_env(cmd->envp_copy, "HOME"));
@@ -58,7 +59,8 @@ void	ft_cd(t_cmd *cmd)
 {
 	char	*path;
 
-	if (cmd->argv[1] != NULL && cmd->argv[1][0] != '~' && cmd->argv[1][0] != '$')
+	if (cmd->argv[1] != NULL && cmd->argv[1][0]
+		!= '~' && cmd->argv[1][0] != '$')
 	{
 		path = cmd->argv[1];
 		if (chdir(path) == -1)

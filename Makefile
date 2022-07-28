@@ -6,7 +6,7 @@
 #    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/27 13:43:41 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/28 11:28:03 by chukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS =	minishell.c \
 		exec.c \
 		env.c \
 		free.c \
+		print.c \
 		./parser/parse.c \
 		./parser/parse_utils.c \
 		./builtins/echo.c \

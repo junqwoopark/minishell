@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 20:39:01 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/28 11:29:03 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,17 @@ char	*ft_strndup(const char *s, size_t n);
 
 t_token	*parse(char *input, t_env *envp_copy);
 
+// print.c
+void	print_str_arr(char *argv[]);
+void	print_export(t_cmd *cmd);
+
 // char	**get_envp(char *envp[]);
 // char	*get_cmd_argv(char *path[], char *cmd);
 char	**get_envp_copy_arr(t_env *envp_copy);
 char	*get_env(t_env *envp_copy, char *key);
 size_t	get_cnt_of_cmd(t_cmd *cmd);
 t_cmd	*get_cmd(t_token *token, t_env *envp_copy, char **envp_copy_arr);
-t_env	*env_new();
+t_env	*env_new(void);
 void	add_env(t_env *envp_copy, char *key, char *value);
 void	add_or_update_env(char *str, t_env *envp);
 t_env	*copy_envp(char *envp[]);
