@@ -6,11 +6,25 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:27:32 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 15:27:48 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/28 12:52:34 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_isdigit_str(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	exit_errno(void)
 {
@@ -37,6 +51,9 @@ void	ft_exit(t_cmd *cmd)
 		return ;
 	}
 	else
-		exit_with_err(cmd->argv[1], "numeric argument required", 255, 0);
-	ft_exit_errcode();
+	{
+		printf("exit\n");
+		exit_with_err(cmd->argv[1], "numeric argument required", 255, 1);
+	}
+	exit_errno();
 }
