@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 20:56:13 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:23:13 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,12 +375,16 @@ t_token	*syntax_analysis(t_token *token)
 		if (token[i].type == T_PIPE)
 		{
 			if (token[i + 1].type != T_WORD
+				&& token[i + 1].type != T_SQUOTES
+				&& token[i + 1].type != T_DQUOTES
 				&& token[i + 1].type != T_REDIRECT)
 				token[i].type = T_ERROR;
 		}
 		else if (token[i].type == T_REDIRECT)
 		{
-			if (token[i + 1].type != T_WORD)
+			if (token[i + 1].type != T_WORD
+				&& token[i + 1].type != T_SQUOTES
+				&& token[i + 1].type != T_DQUOTES)
 				token[i].type = T_ERROR;
 			else if (token[i + 1].type != T_NULL)
 				token[i + 1].type = T_FILE;
@@ -431,8 +435,8 @@ t_token	*parse(char *input, t_env *envp_copy)
 	init_in_quote(input, in_quote);
 	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
 	token = lexcial_analysis(expanded_input, expanded_in_quote);
-	token = env_analysis(token, envp_copy);
 	token = syntax_analysis(token);
+	token = env_analysis(token, envp_copy);
 	if (is_token_error(token))
 	{
 		free_token(&token);
