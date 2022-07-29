@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/29 15:23:13 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:55:55 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ void	init_expanded(char *input, char *in_quote, char *expanded_input, char *expa
 }
 
 // 시간 복잡도 엄청 남, 수정 필요!
-t_token	*env_analysis(t_token *token, t_env *envp_copy)
+t_token	*env_analysis(t_token *token, t_env *envp_copy) // 환경변수 parsing 시, heredoc은 parsing 하면 안됨!!! -> 수정 예정
 {
 	size_t	i;
 	size_t	j;
@@ -375,16 +375,12 @@ t_token	*syntax_analysis(t_token *token)
 		if (token[i].type == T_PIPE)
 		{
 			if (token[i + 1].type != T_WORD
-				&& token[i + 1].type != T_SQUOTES
-				&& token[i + 1].type != T_DQUOTES
 				&& token[i + 1].type != T_REDIRECT)
 				token[i].type = T_ERROR;
 		}
 		else if (token[i].type == T_REDIRECT)
 		{
-			if (token[i + 1].type != T_WORD
-				&& token[i + 1].type != T_SQUOTES
-				&& token[i + 1].type != T_DQUOTES)
+			if (token[i + 1].type != T_WORD)
 				token[i].type = T_ERROR;
 			else if (token[i + 1].type != T_NULL)
 				token[i + 1].type = T_FILE;
