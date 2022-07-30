@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/28 13:23:16 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/30 19:09:32 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,15 @@ typedef struct s_cmd {
 
 extern int	g_errno;
 
+// heredoc.c
+void	ft_heredoc(t_cmd *cmd, size_t *tmp_file_cnt);
+void	ft_unlink(size_t *tmp_file_cnt);
+
 // free.c
 void	free_token(t_token **token);
 void	free_envp_copy_arr(char ***envp_copy_arr);
 void	free_cmd(t_cmd **cmd);
+void	free_env_path(char ***envp_path);
 
 char	*ft_strndup(const char *s, size_t n);
 
@@ -97,6 +102,8 @@ void	add_or_update_env(char *str, t_env *envp);
 
 // error.c
 void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
+void	print_err(char *s1, char *s2, char *s3);
+void	print_token_error(char *error_token);
 
 // exec.c
 size_t	get_cnt_of_cmd(t_cmd *cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:29:01 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 13:35:13 by chukim           ###   ########.fr       */
+/*   Updated: 2022/07/30 19:09:43 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	echo_env(t_cmd *cmd, int i)
 		printf("%d\n", g_errno);
 	value = get_env(cmd->envp_copy, &(cmd->argv[i][1]));
 	printf("%s", value);
-	free(value);
 }
 
 void	ft_echo(t_cmd *cmd)

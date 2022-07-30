@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 21:23:00 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:45:45 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ size_t	get_cnt_of_cmd(t_cmd *cmd)
 
 int	is_builtin(t_cmd *cmd)
 {
-	if (cmd->argc == 0)
-		return (0);
 	if (ft_strcmp(cmd->argv[0], "cd") == 0
 		|| ft_strcmp(cmd->argv[0], "echo") == 0
 		|| ft_strcmp(cmd->argv[0], "pwd") == 0
@@ -66,7 +64,7 @@ void	update_pipe(int *read_pipe, int *write_pipe, int i, int	cnt_of_cmd)
 		pipe(write_pipe);
 }
 
-void	redirection_in(t_cmd *cmd)
+void	redirect_in(t_cmd *cmd)
 {
 	int		fd;
 	size_t	i;
@@ -88,7 +86,7 @@ void	redirection_in(t_cmd *cmd)
 	}
 }
 
-void	redirection_out(t_cmd *cmd)
+void	redirect_out(t_cmd *cmd)
 {
 	int		fd;
 	size_t	i;
@@ -116,6 +114,104 @@ void	redirection_out(t_cmd *cmd)
 	}
 }
 
+int	is_excutable(char *path)
+{
+	struct stat	sb;
+
+	if (stat(path, &sb) == -1)
+		return (0);
+	if (S_ISDIR(sb.st_mode))
+	{
+		errno = EISDIR;
+		return (0);
+	}
+	if (sb.st_mode & S_IXUSR)
+		return (1);
+	else
+		errno = EACCES;
+	return (0);
+}
+
+char	**get_env_path(char *envp[])
+{
+	char	*path;
+
+	while (*envp && ft_strncmp("PATH=", *envp, 5))
+		envp++;
+    if (*envp == NULL)
+		path = "PATH=.:";
+    path = *envp + 5;
+    return (ft_split(path, ':'));
+}
+
+int	is_cmd_contain_slash(t_cmd *cmd)
+{
+	size_t	i;
+
+	i = 0;
+	while (cmd->argv[0][i])
+	{
+		if (cmd->argv[0][i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char    *get_cmd_path(char *path[], t_cmd *cmd)
+{
+	int		i;
+	char	*tmp;
+	char	*cmd_path;
+
+	if (is_cmd_contain_slash(cmd))
+	{
+		if (!is_excutable(cmd->argv[0]))
+			return (NULL);
+		return (ft_strdup(cmd->argv[0]));
+	}
+    tmp = ft_strjoin("/", cmd->argv[0]);
+    i = 0;
+    while (path[i])
+    {
+        cmd_path = ft_strjoin(path[i], tmp);
+        if (is_excutable(cmd_path))
+		{
+			free(tmp);
+			return (cmd_path);
+		}
+		free(cmd_path);
+		i++;
+	}
+	free(tmp);
+	return (NULL);
+}
+
+void	run_cmd(t_cmd *cmd)
+{
+	char	*cmd_path;
+	char	**env_path;
+
+	if (is_builtin(cmd))
+	{
+		// run_builtin(cmd);
+		exit(g_errno);
+	}
+	env_path = get_env_path(cmd->envp_copy_arr);
+	cmd_path = get_cmd_path(env_path, cmd);
+	free_env_path(&env_path);
+	if (cmd_path)
+	{
+		free(cmd->argv[0]);
+		cmd->argv[0] = cmd_path;
+		execve(cmd_path, cmd->argv, cmd->envp_copy_arr);
+	}
+	else if (!is_cmd_contain_slash(cmd))
+		exit_with_err(cmd->argv[0], "command not found", 127, 1);
+	else
+		exit_with_err(cmd->argv[0], strerror(errno), 126, 1);
+}
+
 void	ft_exec(t_cmd *cmd)
 {
 	int		read_pipe[2];
@@ -125,9 +221,10 @@ void	ft_exec(t_cmd *cmd)
 	size_t	cnt_of_cmd;
 
 	cnt_of_cmd = get_cnt_of_cmd(cmd);
-	if (cnt_of_cmd == 1 && is_builtin(&(cmd[0])))
+	if (cnt_of_cmd == 1 && cmd[0].argc && is_builtin(&(cmd[0])))
 	{
-		// 빌트인 실행, 리다이렉션도 해줘야함!!!
+		// redirection -> STD IN, OUT 복제해서 복구해야함!!!
+		// run_builtin(cmd);
 		return ;
 	}
 	i = 0;
@@ -155,8 +252,8 @@ void	ft_exec(t_cmd *cmd)
 		{
 			close(read_pipe[WRITE]);
 			close(write_pipe[READ]);
-			redirection_in(&(cmd[i]));
-			redirection_out(&(cmd[i]));
+			redirect_in(&(cmd[i]));
+			redirect_out(&(cmd[i]));
 			if (cmd[i].read != 0)
 				{
 					dup2(cmd[i].read, STDIN_FILENO);
@@ -167,9 +264,9 @@ void	ft_exec(t_cmd *cmd)
 				dup2(cmd[i].write, STDOUT_FILENO);
 				close(cmd[i].write);
 			}
-			// 실행 (is_builtin?, 오픈 가능한지???)
-			// exit 해야할 듯?(builtin인 경우 실행 후 exit???, 그 외는 execve)
-			exit(1);
+			// 실행부
+			if (cmd[i].argc != 0)
+				run_cmd(&cmd[i]);
 		}
 		close(read_pipe[READ]);
 		close(read_pipe[WRITE]);
@@ -179,5 +276,6 @@ void	ft_exec(t_cmd *cmd)
 		;
 	if (WIFEXITED(g_errno))
 		g_errno = WEXITSTATUS(g_errno);
-
+	else if (WIFSIGNALED(g_errno))
+		g_errno = WTERMSIG(g_errno) + 128;
 }

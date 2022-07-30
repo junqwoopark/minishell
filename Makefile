@@ -3,22 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
+#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/28 13:20:57 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/30 14:52:16 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFTDIR = ./libft
 
-INCLUDES =	-I ~/goinfre/.brew/opt/readline/include \
+INCLUDES =	-I /opt/homebrew/opt/readline/include \
 			-I ./libft/ \
 			-I .
-LIBS	 = 	-lreadline -L ~/goinfre/.brew/opt/readline/lib/ \
-			-lhistory -L ~/goinfre/.brew/opt/readline/lib/ \
+LIBS	 = 	-lreadline -L /opt/homebrew/opt/readline/lib/ \
+			-lhistory -L /opt/homebrew/opt/readline/lib/ \
 			-L ./libft/ -lft
+
+# INCLUDES =	-I ~/goinfre/.brew/opt/readline/include \
+# 			-I ./libft/ \
+# 			-I .
+# LIBS	 = 	-lreadline -L ~/goinfre/.brew/opt/readline/lib/ \
+# 			-lhistory -L ~/goinfre/.brew/opt/readline/lib/ \
+# 			-L ./libft/ -lft
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
@@ -31,6 +38,7 @@ SRCS =	minishell.c \
 		exec.c \
 		free.c \
 		print.c \
+		heredoc.c \
 		./env/env.c \
 		./env/env_utils.c \
 		./parser/parse.c \
