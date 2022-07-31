@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/31 02:45:45 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:19:54 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	redirect_in(t_cmd *cmd)
 	{
 		if (cmd->token[i].type == T_REDIRECT
 			&& (ft_strcmp(cmd->token[i].str, "<") == 0
-			|| ft_strcmp(cmd->token[i].str, "<<")))
+			|| ft_strcmp(cmd->token[i].str, "<<") == 0))
 		{
 			close(cmd->read);
 			fd = open(cmd->token[i + 1].str, O_RDONLY);

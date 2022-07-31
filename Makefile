@@ -6,14 +6,14 @@
 #    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/31 02:57:32 by junkpark         ###   ########.fr        #
+#    Updated: 2022/07/31 18:20:12 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFTDIR = ./libft
 
-# 제 컴퓨터에서 실행하기 위한 경로입니다.
+# # 제 컴퓨터에서 실행하기 위한 경로입니다.
 # INCLUDES =	-I /opt/homebrew/opt/readline/include \
 # 			-I ./libft/ \
 # 			-I .
