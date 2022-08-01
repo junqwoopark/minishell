@@ -6,7 +6,7 @@
 #    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/31 18:20:12 by junkpark         ###   ########.fr        #
+#    Updated: 2022/08/01 13:15:35 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ NAME = minishell
 LIBFTDIR = ./libft
 
 # # 제 컴퓨터에서 실행하기 위한 경로입니다.
-# INCLUDES =	-I /opt/homebrew/opt/readline/include \
+# INCLUDES =	-I /opt/homebrew/Cellar/readline/8.1.2/include \
 # 			-I ./libft/ \
 # 			-I .
-# LIBS	 = 	-lreadline -L /opt/homebrew/opt/readline/lib/ \
-# 			-lhistory -L /opt/homebrew/opt/readline/lib/ \
+# LIBS	 = 	-lreadline -L /opt/homebrew/Cellar/readline/8.1.2/lib/ \
+# 			-lhistory -L /opt/homebrew/Cellar/readline/8.1.2/lib/ \
 # 			-L ./libft/ -lft
 
 INCLUDES =	-I ~/goinfre/.brew/opt/readline/include \

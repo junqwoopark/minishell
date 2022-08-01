@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/30 19:09:32 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:24:43 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ typedef struct s_cmd {
 extern int	g_errno;
 
 // heredoc.c
-void	ft_heredoc(t_cmd *cmd, size_t *tmp_file_cnt);
-void	ft_unlink(size_t *tmp_file_cnt);
+void	heredoc_all(t_cmd *cmd, size_t *tmp_file_cnt);
+void	unlink_all(size_t *tmp_file_cnt);
 
 // free.c
 void	free_token(t_token **token);

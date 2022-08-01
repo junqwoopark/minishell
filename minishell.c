@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/31 02:33:11 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:28:46 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int	main(int argc, char **argv, char **envp)
 				g_errno = 0;
 				envp_copy_arr = get_envp_copy_arr(envp_copy);
 				cmd = get_cmd(token, envp_copy, envp_copy_arr);
-				ft_heredoc(cmd, &tmp_file_cnt);
+				heredoc_all(cmd, &tmp_file_cnt);
 				if (!g_errno)
 					ft_exec(cmd);
 				free_cmd(&cmd);
 				free_token(&token);
 				free_envp_copy_arr(&envp_copy_arr);
-				ft_unlink(&tmp_file_cnt);
+				unlink_all(&tmp_file_cnt);
 			}
 		}
 		free(input);
