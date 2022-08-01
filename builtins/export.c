@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:36:19 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 13:47:21 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 19:56:34 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,17 @@ void	add_or_update_env(char *str, t_env *envp)
 	{
 		if (ft_strcmp(current->key, key_value[0]) == 0)
 		{
-			if (current->key == NULL && current->value == NULL)
-			{
-				free(current->key);
-				free(current->value);
-			}
+			free(current->key);
+			free(current->value);
 			current->key = key_value[0];
 			current->value = key_value[1];
+			free(key_value);
 			return ;
 		}
 		current = current->next;
 	}
 	add_env(envp, key_value[0], key_value[1]);
+	free(key_value);
 }
 
 void	ft_export(t_cmd *cmd)
@@ -69,9 +68,7 @@ void	ft_export(t_cmd *cmd)
 		while (cmd->argv[i] != NULL)
 		{
 			if (is_vaild_export(cmd->argv[i]) != 0)
-			{
 				add_or_update_env(cmd->argv[i], cmd->envp_copy);
-			}
 			else
 				exit_with_err("export", "not a valid identifier", 1, 0);
 			i++;
