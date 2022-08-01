@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 13:13:47 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:20:50 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,6 @@ void	ft_exec(t_cmd *cmd)
 				dup2(cmd[i].write, STDOUT_FILENO);
 				close(cmd[i].write);
 			}
-			printf("%d\n", cmd[i].argc);
 			if (cmd[i].argc != 0)
 				run_cmd(&cmd[i]);
 			exit(g_errno);

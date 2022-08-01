@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:49:32 by junkpark          #+#    #+#             */
-/*   Updated: 2022/07/31 19:31:31 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:18:13 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	heredoc(t_token *token, size_t *tmp_file_cnt)
 	if (WIFEXITED(g_errno))
 		g_errno = WEXITSTATUS(g_errno);
 	else
-		g_errno = WTERMSIG(g_errno);
+		g_errno = WTERMSIG(g_errno) + 128;
 	return (g_errno);
 }
 
