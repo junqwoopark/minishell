@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/28 13:22:51 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 13:34:59 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,23 @@ char	**get_envp_copy_arr(t_env *envp_copy)
 
 char	*get_env(t_env *envp_copy, char *key)
 {
-	size_t	len;
 	t_env	*current;
 
 	current = envp_copy;
 	while (current->next != NULL)
 	{
-		len = ft_strlen(key);
-		if (len < ft_strlen(current->key))
-			len = ft_strlen(current->key);
 		if (ft_strcmp(current->key, key) == 0)
-			return (ft_strdup(current->value));
+			return (current->value);
 		current = current -> next;
 	}
-	return (ft_strdup(""));
+	return ("");
 }
 
 t_env	*env_new(void)
 {
 	t_env	*new;
 
-	new = malloc(sizeof(t_env) * 1);
+	new = calloc(1, sizeof(t_env));
 	if (new == NULL)
 		return (NULL);
 	new->key = NULL;

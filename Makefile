@@ -3,15 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chukim <chukim@student.42.fr>              +#+  +:+       +#+         #
+#    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/28 13:20:57 by chukim           ###   ########.fr        #
+#    Updated: 2022/07/31 18:20:12 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFTDIR = ./libft
+
+# # 제 컴퓨터에서 실행하기 위한 경로입니다.
+# INCLUDES =	-I /opt/homebrew/opt/readline/include \
+# 			-I ./libft/ \
+# 			-I .
+# LIBS	 = 	-lreadline -L /opt/homebrew/opt/readline/lib/ \
+# 			-lhistory -L /opt/homebrew/opt/readline/lib/ \
+# 			-L ./libft/ -lft
 
 INCLUDES =	-I ~/goinfre/.brew/opt/readline/include \
 			-I ./libft/ \
@@ -31,6 +39,7 @@ SRCS =	minishell.c \
 		exec.c \
 		free.c \
 		print.c \
+		heredoc.c \
 		./env/env.c \
 		./env/env_utils.c \
 		./parser/parse.c \

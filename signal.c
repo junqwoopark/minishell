@@ -6,30 +6,43 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:50:42 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/23 20:24:45 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/31 02:49:06 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_signal(int signo)
+void	sigint_handler_in_process(int sig)
 {
-	if (signo == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else if (signo == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-	}
+	(void) sig;
+	printf("\n");
 }
 
-void	set_signal(void)
+void	sigquit_handler_in_process(int sig)
 {
-	signal(SIGINT, handle_signal);
-	signal(SIGQUIT, handle_signal);
+	(void) sig;
+	printf("Quit: %d\n", sig);
+}
+
+void	sigint_handler_no_nl(int sig)
+{
+	(void) sig;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	sigint_handler(int sig)
+{
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void) sig;
+}
+
+void	set_signal(void) // heredoc 일 때는 sigint->g_errno = 130; && 자식 프로세스에서는 in_process 그 외는 sigint_handler
+{
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

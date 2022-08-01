@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/27 20:56:13 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:23:27 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ int		is_valid_quote(char *input)
 			dquote = 0;
 		input++;
 	}
-	if (squote == 1 || dquote == 1)
-		return (0);
-	return (1);
+	if (squote == 1)
+		print_token_error("'");
+	else if (dquote == 1)
+		print_token_error("\"");
+	else
+		return (1);
+	return (0);
 }
 
 void	init_in_quote(char *input, char *in_quote)
@@ -269,7 +273,7 @@ void	init_expanded(char *input, char *in_quote, char *expanded_input, char *expa
 }
 
 // 시간 복잡도 엄청 남, 수정 필요!
-t_token	*env_analysis(t_token *token, t_env *envp_copy)
+t_token	*env_analysis(t_token *token, t_env *envp_copy) // 환경변수 parsing 시, heredoc은 parsing 하면 안됨!!! -> 수정 예정
 {
 	size_t	i;
 	size_t	j;
@@ -329,7 +333,6 @@ t_token	*env_analysis(t_token *token, t_env *envp_copy)
 							tmp = str;
 							str = ft_strjoin(str, env);
 							free(key);
-							free(env);
 							free(tmp);
 						}
 					}
@@ -375,12 +378,16 @@ t_token	*syntax_analysis(t_token *token)
 		if (token[i].type == T_PIPE)
 		{
 			if (token[i + 1].type != T_WORD
+				&& token[i + 1].type != T_DQUOTES
+				&& token[i + 1].type != T_SQUOTES
 				&& token[i + 1].type != T_REDIRECT)
 				token[i].type = T_ERROR;
 		}
 		else if (token[i].type == T_REDIRECT)
 		{
-			if (token[i + 1].type != T_WORD)
+			if (token[i + 1].type != T_WORD
+				&& token[i + 1].type != T_DQUOTES
+				&& token[i + 1].type != T_SQUOTES)
 				token[i].type = T_ERROR;
 			else if (token[i + 1].type != T_NULL)
 				token[i + 1].type = T_FILE;
@@ -406,7 +413,10 @@ int	is_token_error(t_token *token)
 	while (token[i].str)
 	{
 		if (token[i].type == T_ERROR)
+		{
+			print_token_error(token[i].str);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -421,23 +431,19 @@ t_token	*parse(char *input, t_env *envp_copy)
 	t_token	*token;
 
 	if (!is_valid_quote(input))
-	{
-		g_errno = -1;
 		return (NULL);
-	}
 	in_quote = ft_calloc(ft_strlen(input) + 1, 1);
 	expanded_input = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	expanded_in_quote = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	init_in_quote(input, in_quote);
 	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
 	token = lexcial_analysis(expanded_input, expanded_in_quote);
-	token = env_analysis(token, envp_copy);
 	token = syntax_analysis(token);
+	token = env_analysis(token, envp_copy);
 	if (is_token_error(token))
 	{
 		free_token(&token);
 		token = NULL;
-		g_errno = -1;
 	}
 	free(expanded_in_quote);
 	free(expanded_input);
