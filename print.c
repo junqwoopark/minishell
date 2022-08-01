@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:27:44 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/28 11:29:38 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 14:29:36 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_str_arr(char *argv[])
 		printf("declare -x ");
 		while (argv[i][j] != '\0')
 		{
-			if (argv[i][j] == '=' && flag != 1)
+			if (argv[i][j - 1] == '=' && flag != 1)
 			{
 				printf("\"");
 				flag = 1;
@@ -53,8 +53,12 @@ void	print_str_arr(char *argv[])
 			printf("%c", argv[i][j]);
 			j++;
 		}
-		printf("\"");
-		printf("\n");
+		if (flag == 1)
+		{
+			printf("\"\n");
+		}
+		else
+			printf("\"\"\n");
 		flag = 0;
 		i++;
 	}
