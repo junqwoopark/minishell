@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/30 19:09:32 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 14:50:20 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	ft_export(t_cmd *cmd);
 void	ft_unset(t_cmd *cmd);
 
 // env.c
-void	ft_env(t_env *envp_copy);
+void	ft_env(t_cmd *cmd);
 
 // pwd.c
 void	ft_pwd(t_cmd *cmd);

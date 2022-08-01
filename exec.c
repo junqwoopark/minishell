@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 11:51:21 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 14:47:47 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	run_builtin(t_cmd *cmd)
 	else if(ft_strcmp(cmd->argv[0], "unset") == 0)
 		ft_unset(cmd);
 	else if(ft_strcmp(cmd->argv[0], "env") == 0)
-		ft_env(cmd->envp_copy);
+		ft_env(cmd);
 	else if(ft_strcmp(cmd->argv[0], "exit") == 0)
 		ft_exit(cmd);
 	else
