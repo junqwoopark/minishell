@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 20:09:23 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 20:10:47 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_cd(t_cmd *cmd)
 			exit_with_err(path, "No such file or directory", 2, 0);
 		set_pwd(cmd->envp_copy);
 	}
-	else if (cmd->argv[1] == NULL || (cmd->argv[1][0] == '~' && cmd->argv[1][1] == NULL))
+	else if (cmd->argv[1] == NULL || (cmd->argv[1][0] == '~' && cmd->argv[1][1] == '\0'))
 		cd_home(cmd);
 	else if (cmd->argv[1][0] == '$')
 		cd_env(cmd);
