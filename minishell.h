@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/30 19:09:32 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:12:50 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 enum	e_types
 {
 	T_NULL,
-	T_SQUOTES,
-	T_DQUOTES,
 	T_WORD,
 	T_PIPE,
 	T_REDIRECT,

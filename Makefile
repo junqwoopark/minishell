@@ -6,7 +6,7 @@
 #    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/07/31 18:20:12 by junkpark         ###   ########.fr        #
+#    Updated: 2022/08/01 19:28:41 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIBS	 = 	-lreadline -L ~/goinfre/.brew/opt/readline/lib/ \
 			-L ./libft/ -lft
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 AR = ar rcs
 RM = rm -f
 

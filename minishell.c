@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 13:27:23 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 19:04:17 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	main(int argc, char **argv, char **envp)
 			token = parse(input, envp_copy);
 			if (token)
 			{
-				g_errno = 0;
 				envp_copy_arr = get_envp_copy_arr(envp_copy);
 				cmd = get_cmd(token, envp_copy, envp_copy_arr);
+				g_errno = 0;
 				ft_heredoc(cmd, &tmp_file_cnt);
 				if (!g_errno)
 					ft_exec(cmd);

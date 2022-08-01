@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 11:51:21 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 19:07:29 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,6 +287,7 @@ void	ft_exec(t_cmd *cmd)
 			// 실행부
 			if (cmd[i].argc != 0)
 				run_cmd(&cmd[i]);
+			exit(g_errno);
 		}
 		close(read_pipe[READ]);
 		close(read_pipe[WRITE]);
