@@ -6,11 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2022/08/01 21:21:28 by junkpark         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/31 19:28:46 by junkpark         ###   ########.fr       */
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +23,7 @@ void	init_terminal(int argc)
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-<<<<<<< HEAD
 	set_signal(SHELL);
-=======
-	set_signal();
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -57,13 +49,9 @@ int	main(int argc, char **argv, char **envp)
 			token = parse(input, envp_copy);
 			if (token)
 			{
-				g_errno = 0;
 				envp_copy_arr = get_envp_copy_arr(envp_copy);
 				cmd = get_cmd(token, envp_copy, envp_copy_arr);
-<<<<<<< HEAD
 				g_errno = 0;
-=======
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 				heredoc_all(cmd, &tmp_file_cnt);
 				if (!g_errno)
 					ft_exec(cmd);

@@ -6,11 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2022/08/01 21:33:09 by junkpark         ###   ########.fr       */
-=======
-/*   Updated: 2022/08/01 13:20:50 by junkpark         ###   ########.fr       */
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,11 +214,7 @@ void	run_cmd(t_cmd *cmd)
 
 	if (is_builtin(cmd))
 	{
-<<<<<<< HEAD
 		run_builtin(cmd);
-=======
-		// run_builtin(cmd);
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 		exit(g_errno);
 	}
 	env_path = get_env_path(cmd->envp_copy_arr);
@@ -252,11 +244,7 @@ void	ft_exec(t_cmd *cmd)
 	if (cnt_of_cmd == 1 && cmd[0].argc && is_builtin(&(cmd[0])))
 	{
 		// redirection -> STD IN, OUT 복제해서 복구해야함!!!
-<<<<<<< HEAD
 		run_builtin(cmd);
-=======
-		// run_builtin(cmd);
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 		return ;
 	}
 	set_signal(CHILD_PROCESS);
@@ -297,10 +285,7 @@ void	ft_exec(t_cmd *cmd)
 				dup2(cmd[i].write, STDOUT_FILENO);
 				close(cmd[i].write);
 			}
-<<<<<<< HEAD
 			// 실행부
-=======
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 			if (cmd[i].argc != 0)
 				run_cmd(&cmd[i]);
 			exit(g_errno);
@@ -315,7 +300,6 @@ void	ft_exec(t_cmd *cmd)
 	if (WIFEXITED(g_errno))
 		g_errno = WEXITSTATUS(g_errno);
 	else if (WIFSIGNALED(g_errno))
-<<<<<<< HEAD
 	{
 		if (WTERMSIG(g_errno) == SIGINT)
 			printf("^C\n");
@@ -324,7 +308,4 @@ void	ft_exec(t_cmd *cmd)
 		g_errno = WTERMSIG(g_errno) + 128;
 	}
 	set_signal(SHELL);
-=======
-		g_errno = WTERMSIG(g_errno) + 128;
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 }

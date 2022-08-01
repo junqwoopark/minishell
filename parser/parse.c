@@ -6,11 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2022/08/01 19:37:05 by junkpark         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/30 19:23:27 by junkpark         ###   ########.fr       */
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,12 +226,7 @@ void	init_expanded(char *input, char *in_quote, char *increased_input, char *inc
 	}
 }
 
-<<<<<<< HEAD
 char	*get_expanded_str(char *str, t_env *envp_copy)
-=======
-// 시간 복잡도 엄청 남, 수정 필요!
-t_token	*env_analysis(t_token *token, t_env *envp_copy) // 환경변수 parsing 시, heredoc은 parsing 하면 안됨!!! -> 수정 예정
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 {
 	size_t	i;
 	int		in_quote;
@@ -256,77 +247,11 @@ t_token	*env_analysis(t_token *token, t_env *envp_copy) // 환경변수 parsing 
 				i++;
 			if (i != 0)
 			{
-<<<<<<< HEAD
 				tmp = ft_strndup(str, i);
 				to_free = env_analyzed_str;
 				env_analyzed_str = ft_strjoin(env_analyzed_str, tmp);
 				free(tmp);
 				free(to_free);
-=======
-				j = 0;
-				if (token[i].str[j + k] == '$')
-				{
-					token[i].str[j + k] = '\0';
-					tmp = str;
-					str = ft_strjoin(str, &(token[i].str[k]));
-					free(tmp);
-					j++;
-					if (token[i].str[k + j] == '?')
-					{
-						env = ft_itoa(g_errno);
-						tmp = str;
-						str = ft_strjoin(str, env);
-						free(tmp);
-						free(env);
-						j++;
-					}
-					else if (ft_isdigit(token[i].str[k + j]))
-					{
-						while (ft_isdigit(token[i].str[k + j]))
-							j++;
-					}
-					else
-					{
-						while (!ft_isspace(token[i].str[k + j]) && (ft_isalnum(token[i].str[k + j]) || token[i].str[k + j] == '_'))
-							j++;
-						if (j == 1)
-						{
-							tmp = str;
-							str = ft_strjoin(str, "$");
-							free(tmp);
-						}
-						else
-						{
-							key = ft_strndup(&(token[i].str[k + 1]), j - 1);
-							env = get_env(envp_copy, key);
-							tmp = str;
-							str = ft_strjoin(str, env);
-							free(key);
-							free(tmp);
-						}
-					}
-				}
-				else
-				{
-					while (token[i].str[k + j] && token[i].str[k + j] != '$')
-						j++;
-					if (token[i].str[k + j] == '$')
-					{
-						token[i].str[k + j] = '\0';
-						tmp = str;
-						str = ft_strjoin(str, &(token[i].str[k]));
-						free(tmp);
-						token[i].str[k + j] = '$';
-					}
-					else
-					{
-						tmp = str;
-						str = ft_strjoin(str, &(token[i].str[k]));
-						free(tmp);
-					}
-				}
-				k += j;
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 			}
 			str += i + 1;
 		}
@@ -416,16 +341,12 @@ t_token	*syntax_analysis(t_token *token)
 		if (token[i].type == T_PIPE)
 		{
 			if (token[i + 1].type != T_WORD
-				&& token[i + 1].type != T_DQUOTES
-				&& token[i + 1].type != T_SQUOTES
 				&& token[i + 1].type != T_REDIRECT)
 				token[i].type = T_ERROR;
 		}
 		else if (token[i].type == T_REDIRECT)
 		{
-			if (token[i + 1].type != T_WORD
-				&& token[i + 1].type != T_DQUOTES
-				&& token[i + 1].type != T_SQUOTES)
+			if (token[i + 1].type != T_WORD)
 				token[i].type = T_ERROR;
 			else if (token[i + 1].type != T_NULL)
 				token[i + 1].type = T_FILE;
@@ -474,16 +395,10 @@ t_token	*parse(char *input, t_env *envp_copy)
 	increased_input = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	increased_in_quote = ft_calloc(ft_strlen(input) * 3 + 1, 1);
 	init_in_quote(input, in_quote);
-<<<<<<< HEAD
 	init_expanded(input, in_quote, increased_input, increased_in_quote);
 	token = lexcial_analysis(increased_input, increased_in_quote);
 	token = expand_token(token, envp_copy);
-=======
-	init_expanded(input, in_quote, expanded_input, expanded_in_quote);
-	token = lexcial_analysis(expanded_input, expanded_in_quote);
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 	token = syntax_analysis(token);
-	token = env_analysis(token, envp_copy);
 	if (is_token_error(token))
 	{
 		free_token(&token);

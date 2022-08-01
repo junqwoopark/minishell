@@ -6,17 +6,12 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:27:44 by chukim            #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2022/08/01 21:49:44 by chukim           ###   ########.fr       */
-=======
-/*   Updated: 2022/07/28 11:29:38 by chukim           ###   ########.fr       */
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-<<<<<<< HEAD
 void	print_end(int flag)
 {
 	if (flag == 1)
@@ -25,8 +20,6 @@ void	print_end(int flag)
 		printf("\n");
 }
 
-=======
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 int	compare_str(char *str1, char *str2)
 {
 	size_t	i;
@@ -60,11 +53,7 @@ void	print_str_arr(char *argv[])
 		printf("declare -x ");
 		while (argv[i][j] != '\0')
 		{
-<<<<<<< HEAD
 			if (argv[i][j - 1] == '=' && flag != 1)
-=======
-			if (argv[i][j] == '=' && flag != 1)
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 			{
 				printf("\"");
 				flag = 1;
@@ -72,12 +61,7 @@ void	print_str_arr(char *argv[])
 			printf("%c", argv[i][j]);
 			j++;
 		}
-<<<<<<< HEAD
 		print_end(flag);
-=======
-		printf("\"");
-		printf("\n");
->>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 		flag = 0;
 		i++;
 	}
