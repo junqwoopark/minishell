@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:07:29 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:35:50 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	run_builtin(t_cmd *cmd)
 	else if(ft_strcmp(cmd->argv[0], "unset") == 0)
 		ft_unset(cmd);
 	else if(ft_strcmp(cmd->argv[0], "env") == 0)
-		ft_env(cmd->envp_copy);
+		ft_env(cmd);
 	else if(ft_strcmp(cmd->argv[0], "exit") == 0)
 		ft_exit(cmd);
 	else

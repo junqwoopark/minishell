@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 15:12:50 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:36:10 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_export(t_cmd *cmd);
 void	ft_unset(t_cmd *cmd);
 
 // env.c
-void	ft_env(t_env *envp_copy);
+void	ft_env(t_cmd *cmd);
 
 // pwd.c
 void	ft_pwd(t_cmd *cmd);
