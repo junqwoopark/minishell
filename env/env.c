@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 13:24:46 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 13:34:59 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 21:51:28 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ char	**set_envp_copy_arr(char **envp_copy_arr, t_env *envp_copy)
 		len = ft_strlen(current->key) + ft_strlen(current->value);
 		envp_copy_arr[i] = ft_calloc(len + 2, sizeof(char *));
 		ft_strlcat(envp_copy_arr[i], current->key, len + 2);
-		ft_strlcat(envp_copy_arr[i], "=", len + 2);
-		ft_strlcat(envp_copy_arr[i], current->value, len + 2);
+		if (current->value != NULL)
+		{
+			ft_strlcat(envp_copy_arr[i], "=", len + 2);
+			ft_strlcat(envp_copy_arr[i], current->value, len + 2);
+		}
 		i++;
 		current = current->next;
 	}
@@ -67,7 +70,12 @@ char	*get_env(t_env *envp_copy, char *key)
 	while (current->next != NULL)
 	{
 		if (ft_strcmp(current->key, key) == 0)
-			return (current->value);
+		{
+			if (current->value != NULL)
+				return (current->value);
+			else
+				return ("");
+		}
 		current = current -> next;
 	}
 	return ("");

@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:36:19 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:56:34 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 21:40:28 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ void	add_or_update_env(char *str, t_env *envp)
 	{
 		if (ft_strcmp(current->key, key_value[0]) == 0)
 		{
-			free(current->key);
 			free(current->value);
-			current->key = key_value[0];
 			current->value = key_value[1];
+			free(key_value[0]);
 			free(key_value);
 			return ;
 		}
