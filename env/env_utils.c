@@ -6,7 +6,11 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:05:49 by chukim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/01 21:46:55 by chukim           ###   ########.fr       */
+=======
+/*   Updated: 2022/07/28 13:22:56 by chukim           ###   ########.fr       */
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +22,27 @@ char	**divide_with_equal2(int i, char *str, char **ret)
 	int	k;
 
 	ret[0] = ft_calloc(i + 1, sizeof(char));
+<<<<<<< HEAD
+=======
+	ret[1] = ft_calloc(ft_strlen(str) - i, sizeof(char));
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 	j = -1;
 	while (++j < i)
 		ret[0][j] = str[j];
 	if (ft_strlen(str) - i == 0)
 	{
+<<<<<<< HEAD
 		ret[1] = NULL;
 		return (ret);
 	}
 	k = 0;
 	ret[1] = ft_calloc(ft_strlen(str) - i, sizeof(char));
+=======
+		ret[1] = "\0";
+		return (ret);
+	}
+	k = 0;
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 	while (str[j + 1] != '\0')
 	{
 		ret[1][k] = str[j + 1];

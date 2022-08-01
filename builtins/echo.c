@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:29:01 by chukim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/01 14:42:58 by chukim           ###   ########.fr       */
+=======
+/*   Updated: 2022/07/30 19:09:43 by junkpark         ###   ########.fr       */
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +32,19 @@ int	check_echo_option(char *str)
 	return (1);
 }
 
+<<<<<<< HEAD
+=======
+void	echo_env(t_cmd *cmd, int i)
+{
+	char	*value;
+
+	if (cmd->argv[1][0] == '$' && cmd->argv[1][1] == '?')
+		printf("%d\n", g_errno);
+	value = get_env(cmd->envp_copy, &(cmd->argv[i][1]));
+	printf("%s", value);
+}
+
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 void	ft_echo(t_cmd *cmd)
 {
 	int	i;

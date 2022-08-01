@@ -6,7 +6,11 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/01 21:13:45 by junkpark         ###   ########.fr       */
+=======
+/*   Updated: 2022/07/31 18:24:43 by junkpark         ###   ########.fr       */
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +121,11 @@ size_t	get_cnt_of_cmd(t_cmd *cmd);
 void	ft_exec(t_cmd *cmd);
 
 // signal.c
+<<<<<<< HEAD
 void	set_signal(int type);
+=======
+void	set_signal(void);
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 
 // export.c
 void	ft_export(t_cmd *cmd);
@@ -126,7 +134,11 @@ void	ft_export(t_cmd *cmd);
 void	ft_unset(t_cmd *cmd);
 
 // env.c
+<<<<<<< HEAD
 void	ft_env(t_cmd *cmd);
+=======
+void	ft_env(t_env *envp_copy);
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 
 // pwd.c
 void	ft_pwd(t_cmd *cmd);

@@ -6,7 +6,11 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:36:19 by chukim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/01 21:40:28 by chukim           ###   ########.fr       */
+=======
+/*   Updated: 2022/07/28 11:29:34 by chukim           ###   ########.fr       */
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +45,12 @@ void	add_or_update_env(char *str, t_env *envp)
 	current = envp;
 	while (current->key != NULL)
 	{
+<<<<<<< HEAD
 		if (ft_strcmp(current->key, key_value[0]) == 0)
+=======
+		if (ft_strncmp(current->key, key_value[0],
+				ft_strlen(key_value[0])) == 0)
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 		{
 			free(current->value);
 			current->value = key_value[1];

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/08/01 20:14:30 by chukim           ###   ########.fr       */
+=======
+/*   Updated: 2022/07/31 02:52:35 by junkpark         ###   ########.fr       */
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +54,18 @@ void	cd_home(t_cmd *cmd)
 	}
 }
 
+<<<<<<< HEAD
+=======
+void	cd_env(t_cmd *cmd)
+{
+	char	*path;
+
+	path = get_env(cmd->envp_copy, &(cmd->argv[1][1]));
+	if (chdir(path) == -1)
+		chdir(get_env(cmd->envp_copy, "HOME"));
+}
+
+>>>>>>> fce57a0447d231b5f440f1e4b40b07da838d904f
 void	ft_cd(t_cmd *cmd)
 {
 	char	*path;
