@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 16:38:09 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 18:32:15 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	cd_home(t_cmd *cmd)
 	path = get_env(cmd->envp_copy, "HOME");
 	if (cmd->argv[1] == NULL)
 	{
-		if (chdir(path) == -1 && (strcmp(get_env(cmd->envp_copy, "HOME"), "") == 0))
+		if (chdir(path) == -1
+			&& (strcmp(get_env(cmd->envp_copy, "HOME"), "") == 0))
 			exit_with_err("cd", "HOME not set", 2, 0);
 		else
 			exit_with_err("cd", "No such file or directory", 2, 0);
