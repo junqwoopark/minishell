@@ -6,31 +6,11 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:50:42 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/31 02:49:06 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 22:09:39 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	sigint_handler_in_process(int sig)
-{
-	(void) sig;
-	printf("\n");
-}
-
-void	sigquit_handler_in_process(int sig)
-{
-	(void) sig;
-	printf("Quit: %d\n", sig);
-}
-
-void	sigint_handler_no_nl(int sig)
-{
-	(void) sig;
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
 
 void	sigint_handler(int sig)
 {
@@ -41,8 +21,26 @@ void	sigint_handler(int sig)
 	(void) sig;
 }
 
-void	set_signal(void) // heredoc 일 때는 sigint->g_errno = 130; && 자식 프로세스에서는 in_process 그 외는 sigint_handler
+void	set_signal(int	type) // heredoc 일 때는 sigint->g_errno = 130; && 자식 프로세스에서는 in_process 그 외는 sigint_handler
 {
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	if (type == SHELL)
+	{
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (type == HEREDOC)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (type == CHILD_PROCESS)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+	else if (type == IGNORE)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 }

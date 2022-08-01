@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:26:15 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:04:17 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 21:21:28 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_terminal(int argc)
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	set_signal();
+	set_signal(SHELL);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -52,13 +52,13 @@ int	main(int argc, char **argv, char **envp)
 				envp_copy_arr = get_envp_copy_arr(envp_copy);
 				cmd = get_cmd(token, envp_copy, envp_copy_arr);
 				g_errno = 0;
-				ft_heredoc(cmd, &tmp_file_cnt);
+				heredoc_all(cmd, &tmp_file_cnt);
 				if (!g_errno)
 					ft_exec(cmd);
 				free_cmd(&cmd);
 				free_token(&token);
 				free_envp_copy_arr(&envp_copy_arr);
-				ft_unlink(&tmp_file_cnt);
+				unlink_all(&tmp_file_cnt);
 			}
 		}
 		free(input);

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:36:10 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 21:13:45 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ enum	e_types
 	T_REDIRECT,
 	T_FILE,
 	T_ERROR
+};
+
+enum	e_setsignal
+{
+	SHELL,
+	HEREDOC,
+	CHILD_PROCESS,
+	IGNORE,
+	DEFAULT
 };
 
 # define READ 0
@@ -67,8 +76,8 @@ typedef struct s_cmd {
 extern int	g_errno;
 
 // heredoc.c
-void	ft_heredoc(t_cmd *cmd, size_t *tmp_file_cnt);
-void	ft_unlink(size_t *tmp_file_cnt);
+void	heredoc_all(t_cmd *cmd, size_t *tmp_file_cnt);
+void	unlink_all(size_t *tmp_file_cnt);
 
 // free.c
 void	free_token(t_token **token);
@@ -108,7 +117,7 @@ size_t	get_cnt_of_cmd(t_cmd *cmd);
 void	ft_exec(t_cmd *cmd);
 
 // signal.c
-void	set_signal(void);
+void	set_signal(int type);
 
 // export.c
 void	ft_export(t_cmd *cmd);

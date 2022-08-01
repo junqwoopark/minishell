@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:35:50 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 21:33:09 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ void	ft_exec(t_cmd *cmd)
 		run_builtin(cmd);
 		return ;
 	}
+	set_signal(CHILD_PROCESS);
 	i = 0;
 	init_pipe(read_pipe, write_pipe);
 	while (i < cnt_of_cmd)
@@ -289,6 +290,7 @@ void	ft_exec(t_cmd *cmd)
 				run_cmd(&cmd[i]);
 			exit(g_errno);
 		}
+		set_signal(IGNORE);
 		close(read_pipe[READ]);
 		close(read_pipe[WRITE]);
 		i++;
@@ -298,5 +300,12 @@ void	ft_exec(t_cmd *cmd)
 	if (WIFEXITED(g_errno))
 		g_errno = WEXITSTATUS(g_errno);
 	else if (WIFSIGNALED(g_errno))
+	{
+		if (WTERMSIG(g_errno) == SIGINT)
+			printf("^C\n");
+		else if (WTERMSIG(g_errno) == SIGQUIT)
+			printf("^\\");
 		g_errno = WTERMSIG(g_errno) + 128;
+	}
+	set_signal(SHELL);
 }
