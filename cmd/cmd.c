@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 17:20:09 by junkpark          #+#    #+#             */
-/*   Updated: 2022/07/31 02:04:16 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 14:09:38 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_cmd	*get_cmd(t_token *token, t_env *envp_copy, char **envp_copy_arr)
 	}
 	cmd = set_argc(cmd);
 	cmd = set_argv(cmd);
-	// // to_print!!!
+	// to_print!!!
 	// int	x = 0, y;
 	// while (cmd[x].token)
 	// {

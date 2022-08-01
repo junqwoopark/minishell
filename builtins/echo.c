@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:29:01 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 12:56:27 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 14:16:38 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_echo_option(char *str)
 {
 	size_t	i;
 
-	if (ft_strcmp(str, "-n") != 0)
+	if (ft_strncmp(str, "-n", 2) != 0)
 		return (0);
 	i = 2;
 	while (str[i])
