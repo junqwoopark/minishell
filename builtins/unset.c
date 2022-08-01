@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:24:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/07/28 11:30:42 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 20:00:08 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	delete_env(char *str, t_env *envp)
 		if (ft_strncmp(str, current->key, ft_strlen(str) + 1) == 0)
 		{
 			front->next = current->next;
+			free(current->key);
+			free(current->value);
 			free(current);
 		}
 		front = current;

@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 18:32:15 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 20:09:23 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	set_pwd(t_env *envp)
 	old_pwd = ft_strjoin("OLDPWD=", get_env(envp, "PWD"));
 	add_or_update_env(cur_pwd, envp);
 	add_or_update_env(old_pwd, envp);
+	free(tmp);
 	free(cur_pwd);
 	free(old_pwd);
 }
@@ -70,10 +71,8 @@ void	ft_cd(t_cmd *cmd)
 			exit_with_err(path, "No such file or directory", 2, 0);
 		set_pwd(cmd->envp_copy);
 	}
-	else if (cmd->argv[1] == NULL || cmd->argv[1][0] == '~')
-	{
+	else if (cmd->argv[1] == NULL || (cmd->argv[1][0] == '~' && cmd->argv[1][1] == NULL))
 		cd_home(cmd);
-	}
 	else if (cmd->argv[1][0] == '$')
 		cd_env(cmd);
 }
