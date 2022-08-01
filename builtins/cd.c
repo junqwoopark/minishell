@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 20:10:47 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 20:14:30 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,6 @@ void	cd_home(t_cmd *cmd)
 	}
 }
 
-void	cd_env(t_cmd *cmd)
-{
-	char	*path;
-
-	path = get_env(cmd->envp_copy, &(cmd->argv[1][1]));
-	if (chdir(path) == -1)
-		chdir(get_env(cmd->envp_copy, "HOME"));
-}
-
 void	ft_cd(t_cmd *cmd)
 {
 	char	*path;
@@ -71,8 +62,9 @@ void	ft_cd(t_cmd *cmd)
 			exit_with_err(path, "No such file or directory", 2, 0);
 		set_pwd(cmd->envp_copy);
 	}
-	else if (cmd->argv[1] == NULL || (cmd->argv[1][0] == '~' && cmd->argv[1][1] == '\0'))
+	else if (cmd->argv[1] == NULL
+		|| (cmd->argv[1][0] == '~' && cmd->argv[1][1] == '\0'))
 		cd_home(cmd);
-	else if (cmd->argv[1][0] == '$')
-		cd_env(cmd);
+	else if (cmd->argv[1][0] == '~')
+		exit_with_err("cd", "No such file or directory", 2, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:05:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:44:42 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 21:20:59 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ char	**divide_with_equal2(int i, char *str, char **ret)
 	int	k;
 
 	ret[0] = ft_calloc(i + 1, sizeof(char));
-	ret[1] = ft_calloc(ft_strlen(str) - i, sizeof(char));
 	j = -1;
 	while (++j < i)
 		ret[0][j] = str[j];
 	if (ft_strlen(str) - i == 0)
 	{
-		ret[1] = "";
+		ret[1] = ft_strdup("");
 		return (ret);
 	}
 	k = 0;
+	ret[1] = ft_calloc(ft_strlen(str) - i, sizeof(char));
 	while (str[j + 1] != '\0')
 	{
 		ret[1][k] = str[j + 1];
