@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:31:28 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:24:28 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:37:05 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,14 +351,14 @@ t_token	*syntax_analysis(t_token *token)
 			else if (token[i + 1].type != T_NULL)
 				token[i + 1].type = T_FILE;
 		}
-		if (token[i].type == T_WORD)
-			printf("word\t|%s|\n", token[i].str);
-		else if (token[i].type == T_FILE)
-			printf("file\t|%s|\n", token[i].str);
-		else if (token[i].type == T_ERROR)
-			printf("error\t|%s|\n", token[i].str);
-		else if (token[i].type == T_PIPE)
-			printf("pipe\t|%s|\n", token[i].str);
+		// if (token[i].type == T_WORD)
+		// 	printf("word\t|%s|\n", token[i].str);
+		// else if (token[i].type == T_FILE)
+		// 	printf("file\t|%s|\n", token[i].str);
+		// else if (token[i].type == T_ERROR)
+		// 	printf("error\t|%s|\n", token[i].str);
+		// else if (token[i].type == T_PIPE)
+		// 	printf("pipe\t|%s|\n", token[i].str);
 		i++;
 	}
 	return (token);
