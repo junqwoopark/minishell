@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:27:44 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 19:44:36 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 21:49:44 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_end(int flag)
 	if (flag == 1)
 		printf("\"\n");
 	else
-		printf("\"\"\n");
+		printf("\n");
 }
 
 int	compare_str(char *str1, char *str2)

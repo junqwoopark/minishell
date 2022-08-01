@@ -6,7 +6,7 @@
 /*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:05:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 21:20:59 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/01 21:46:55 by chukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**divide_with_equal2(int i, char *str, char **ret)
 		ret[0][j] = str[j];
 	if (ft_strlen(str) - i == 0)
 	{
-		ret[1] = ft_strdup("");
+		ret[1] = NULL;
 		return (ret);
 	}
 	k = 0;
