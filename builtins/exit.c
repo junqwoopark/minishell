@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:27:32 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 14:13:32 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/02 18:53:46 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_exit(t_cmd *cmd)
 	{
 		printf("exit\n");
 		exit_with_err("exit", "too many arguments", 1, 0);
-		g_errno = 1;
 		return ;
 	}
 	else

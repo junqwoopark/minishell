@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/21 09:31:36 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 19:22:55 by junkpark         ###   ########.fr       */
+/*   Created: 2022/08/02 21:48:00 by junkpark          #+#    #+#             */
+/*   Updated: 2022/08/03 13:59:44 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s1)
+size_t	get_cnt_of_pipe(t_token *token)
 {
-	char	*ptr;
 	size_t	i;
-	size_t	len;
+	size_t	cnt;
 
 	i = 0;
-	len = ft_strlen(s1);
-	ptr = (char *)ft_calloc(sizeof(char), (len + 1));
-	if (ptr == NULL)
-		return (0);
-	while (i < len)
+	cnt = 0;
+	while (token[i].type)
 	{
-		ptr[i] = s1[i];
+		if (token[i].type == T_PIPE)
+			cnt++;
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (cnt);
 }

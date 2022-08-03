@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   unlink.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/21 09:31:36 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 19:22:55 by junkpark         ###   ########.fr       */
+/*   Created: 2022/08/03 13:38:17 by junkpark          #+#    #+#             */
+/*   Updated: 2022/08/03 14:15:03 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s1)
+void	unlink_all(void)
 {
-	char	*ptr;
 	size_t	i;
-	size_t	len;
+	size_t	tmp_file_cnt;
+	char	*tmp;
+	char	*path;
 
 	i = 0;
-	len = ft_strlen(s1);
-	ptr = (char *)ft_calloc(sizeof(char), (len + 1));
-	if (ptr == NULL)
-		return (0);
-	while (i < len)
+	tmp_file_cnt = get_or_set_tmp_file_cnt(0, 0);
+	while (i < tmp_file_cnt)
 	{
-		ptr[i] = s1[i];
+		path = "/tmp/tmpfile_minishell_";
+		tmp = ft_itoa(i);
+		path = ft_strjoin(path, tmp);
+		free(tmp);
+		unlink(path);
+		free(path);
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
 }

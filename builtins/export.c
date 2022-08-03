@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:36:19 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 21:40:28 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/03 19:38:01 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	is_vaild_export(char *argv)
 	{
 		if (argv[i] == '=')
 			flag = 1;
-		if ((!ft_isalnum(argv[i]) && argv[i] != '=' && argv[i] != ' ')
-			|| (argv[i] == ' ' && flag == 0))
+		if (!ft_isalnum(argv[i]) && argv[i] != '='
+			&& argv[i] != '_' && flag == 0)
 			return (0);
 	}
 	return (1);
@@ -43,8 +43,13 @@ void	add_or_update_env(char *str, t_env *envp)
 	{
 		if (ft_strcmp(current->key, key_value[0]) == 0)
 		{
-			free(current->value);
-			current->value = key_value[1];
+			if (current->value != NULL && key_value[1] == NULL)
+				free(key_value[1]);
+			else
+			{
+				free(current->value);
+				current->value = key_value[1];
+			}
 			free(key_value[0]);
 			free(key_value);
 			return ;
@@ -69,7 +74,8 @@ void	ft_export(t_cmd *cmd)
 			if (is_vaild_export(cmd->argv[i]) != 0)
 				add_or_update_env(cmd->argv[i], cmd->envp_copy);
 			else
-				exit_with_err("export", "not a valid identifier", 1, 0);
+				exit_with_err_second("export", cmd->argv[i],
+					"not a valid identifier", 1);
 			i++;
 		}
 	}

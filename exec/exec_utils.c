@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/21 09:31:36 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 19:22:55 by junkpark         ###   ########.fr       */
+/*   Created: 2022/08/03 15:57:04 by junkpark          #+#    #+#             */
+/*   Updated: 2022/08/03 16:09:44 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s1)
+size_t	get_cnt_of_cmd(t_cmd *cmd)
 {
-	char	*ptr;
 	size_t	i;
-	size_t	len;
 
 	i = 0;
-	len = ft_strlen(s1);
-	ptr = (char *)ft_calloc(sizeof(char), (len + 1));
-	if (ptr == NULL)
-		return (0);
-	while (i < len)
-	{
-		ptr[i] = s1[i];
+	while (cmd[i].token)
 		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (i);
 }

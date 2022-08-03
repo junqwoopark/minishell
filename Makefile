@@ -6,7 +6,7 @@
 #    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/08/01 19:28:41 by junkpark         ###   ########.fr        #
+#    Updated: 2022/08/03 18:22:41 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,29 +29,43 @@ LIBS	 = 	-lreadline -L ~/goinfre/.brew/opt/readline/lib/ \
 			-L ./libft/ -lft
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 AR = ar rcs
 RM = rm -f
 
 SRCS =	minishell.c \
-		signal.c \
-		error.c \
-		exec.c \
-		free.c \
-		print.c \
-		heredoc.c \
-		./env/env.c \
-		./env/env_utils.c \
-		./parser/parse.c \
-		./parser/parse_utils.c \
 		./builtins/echo.c \
 		./builtins/export.c \
+		./builtins/export_utils.c \
 		./builtins/unset.c \
 		./builtins/cd.c \
 		./builtins/env.c \
 		./builtins/pwd.c \
 		./builtins/exit.c \
 		./cmd/cmd.c \
+		./cmd/cmd_utils.c \
+		./env/env.c \
+		./env/env_utils.c \
+		./exec/exec.c \
+		./exec/exec_utils.c \
+		./exec/path_utils.c \
+		./exec/pipe_utils.c \
+		./exec/redirect_utils.c \
+		./exec/run_utils.c \
+		./exec/file_utils.c \
+		./heredoc/heredoc.c \
+		./heredoc/heredoc_utils.c \
+		./heredoc/unlink.c \
+		./parser/parse.c \
+		./parser/parse_utils.c \
+		./parser/token_utils.c \
+		./parser/expand.c \
+		./parser/expand_utils.c \
+		./parser/big_utils.c \
+		./utils/signal.c \
+		./utils/error.c \
+		./utils/free.c \
+		./utils/print.c \
 
 OBJS = $(SRCS:.c=.o)
 

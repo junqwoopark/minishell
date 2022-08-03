@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:24:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 21:36:52 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/03 18:52:24 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	ft_unset(t_cmd *cmd)
 			if (is_vaild_unset(cmd->argv[i]) == 1)
 				delete_env(cmd->argv[i], cmd->envp_copy);
 			else
-				exit_with_err(cmd->argv[i], "not a valid identifier", 1, 0);
+				exit_with_err_second("unset", cmd->argv[i],
+					"not a valid identifier", 1);
 			i++;
 		}
 	}
