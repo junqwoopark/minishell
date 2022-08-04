@@ -6,29 +6,30 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:38:17 by junkpark          #+#    #+#             */
-/*   Updated: 2022/08/03 14:15:03 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 14:36:01 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unlink_all(void)
+void	unlink_all(t_cmd *cmd)
 {
-	size_t	i;
+	int		i;
+	int		j;
 	size_t	tmp_file_cnt;
-	char	*tmp;
-	char	*path;
 
 	i = 0;
-	tmp_file_cnt = get_or_set_tmp_file_cnt(0, 0);
-	while (i < tmp_file_cnt)
+	tmp_file_cnt = 0;
+	while (cmd[i].token)
 	{
-		path = "/tmp/tmpfile_minishell_";
-		tmp = ft_itoa(i);
-		path = ft_strjoin(path, tmp);
-		free(tmp);
-		unlink(path);
-		free(path);
+		j = 0;
+		while (cmd[i].token[j].type)
+		{
+			if (cmd[i].token[j].type == T_REDIRECT
+				&& ft_strcmp(cmd[i].token[j].str, "<<") == 0)
+				unlink(cmd[i].token[j + 1].str);
+			j++;
+		}
 		i++;
 	}
 }

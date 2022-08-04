@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:24:08 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 13:10:41 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:06:54 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,23 @@ void	init_in_quote(char *input, char *in_quote)
 		input++;
 		in_quote++;
 	}
+}
+
+char	*get_env_return_null(t_env *envp_copy, char *key)
+{
+	t_env	*current;
+
+	current = envp_copy;
+	while (current->next != NULL)
+	{
+		if (ft_strcmp(current->key, key) == 0)
+		{
+			if (current->value != NULL)
+				return (current->value);
+			else
+				return ("");
+		}
+		current = current -> next;
+	}
+	return (NULL);
 }

@@ -6,19 +6,19 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:00:30 by junkpark          #+#    #+#             */
-/*   Updated: 2022/08/03 16:06:23 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 15:10:17 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	redirect_in(t_cmd *cmd, int to_exit)
+int	redirect_in(t_cmd *cmd)
 {
 	int		fd;
 	size_t	i;
 
 	i = 0;
-	while (cmd->token[i].type && !g_errno)
+	while (cmd->token[i].type)
 	{
 		if (cmd->token[i].type == T_REDIRECT
 			&& (ft_strcmp(cmd->token[i].str, "<") == 0
@@ -26,21 +26,23 @@ void	redirect_in(t_cmd *cmd, int to_exit)
 			fd = open(cmd->token[i + 1].str, O_RDONLY);
 		if (fd == -1)
 		{
-			exit_with_err(cmd->token[i + 1].str, strerror(errno), 1, to_exit);
+			print_err("minishell", cmd->token[i + 1].str, strerror(errno));
+			return (errno);
 			break ;
 		}
 		ft_dup2(fd, STDIN_FILENO);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
-void	redirect_out(t_cmd *cmd, int to_exit)
+int	redirect_out(t_cmd *cmd)
 {
 	int		fd;
 	size_t	i;
 
 	i = 0;
-	while (cmd->token[i].type && !g_errno)
+	while (cmd->token[i].type)
 	{
 		if (cmd->token[i].type == T_REDIRECT
 			&& ft_strcmp(cmd->token[i].str, ">>") == 0)
@@ -51,10 +53,12 @@ void	redirect_out(t_cmd *cmd, int to_exit)
 			fd = open(cmd->token[i + 1].str, O_WRONLY | O_CREAT | O_TRUNC, 420);
 		if (fd == -1)
 		{
-			exit_with_err(cmd->token[i + 1].str, strerror(errno), 1, to_exit);
+			print_err("minishell", cmd->token[i + 1].str, strerror(errno));
+			return (errno);
 			break ;
 		}
 		ft_dup2(fd, STDOUT_FILENO);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

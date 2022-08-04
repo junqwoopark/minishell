@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:24:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 18:52:24 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 15:19:14 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	delete_env(char *str, t_env *envp)
 		front = current;
 		current = current->next;
 	}
+	g_errno = 0;
 }
 
 void	ft_unset(t_cmd *cmd)

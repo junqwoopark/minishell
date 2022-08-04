@@ -6,29 +6,29 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:49:32 by junkpark          #+#    #+#             */
-/*   Updated: 2022/08/03 14:54:41 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:38:13 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	heredoc_in_child_process(char *tmp_file_path, char *delimiter)
+void	heredoc_one(t_token *delimiter_token, size_t tmp_file_cnt)
 {
 	int		fd;
 	char	*tmp;
+	char	*tmp_file_path;
 
+	tmp_file_path = get_tmp_file_path(tmp_file_cnt);
 	fd = open(tmp_file_path, O_WRONLY | O_CREAT | O_TRUNC, 420);
 	while (1)
 	{
 		tmp = readline("> ");
 		if (!tmp)
 		{
-			close(fd);
-			fd = open(tmp_file_path, O_WRONLY | O_CREAT | O_TRUNC, 420);
-			close(fd);
+			clear_file(fd, tmp_file_path, tmp_file_cnt);
 			break ;
 		}
-		if (ft_strcmp(tmp, delimiter) == 0)
+		if (ft_strcmp(tmp, delimiter_token->str) == 0)
 		{
 			free(tmp);
 			break ;
@@ -37,42 +37,6 @@ void	heredoc_in_child_process(char *tmp_file_path, char *delimiter)
 		free(tmp);
 	}
 	close(fd);
-	exit(g_errno);
-}
-
-void	wait_heredoc(void)
-{
-	waitpid(-1, &g_errno, 0);
-	if (WIFEXITED(g_errno))
-		g_errno = WEXITSTATUS(g_errno);
-	else if (WIFSIGNALED(g_errno))
-	{
-		printf("\n");
-		g_errno = 1;
-	}
-}
-
-int	heredoc_one(t_token *delimiter_token)
-{
-	pid_t	pid;
-	char	*tmp_file_path;
-	char	*delimiter;
-
-	set_signal(HEREDOC);
-	tmp_file_path = get_tmp_file_path();
-	delimiter = delimiter_token->str;
-	pid = fork();
-	if (pid == 0)
-		heredoc_in_child_process(tmp_file_path, delimiter);
-	else
-	{
-		set_signal(IGNORE);
-		free(delimiter_token->str);
-		delimiter_token->str = tmp_file_path;
-		wait_heredoc();
-	}
-	set_signal(SHELL);
-	return (g_errno);
 }
 
 t_token	*find_delimiter_token(t_cmd *cmd, size_t *i, size_t *j)
@@ -92,23 +56,57 @@ t_token	*find_delimiter_token(t_cmd *cmd, size_t *i, size_t *j)
 	return (NULL);
 }
 
-void	heredoc_all(t_cmd *cmd)
+void	heredoc_in_child_process(t_cmd *cmd)
 {
+	pid_t	pid;
 	size_t	i;
 	size_t	j;
 	size_t	tmp_file_cnt;
 	t_token	*delimiter_token;
 
-	i = 0;
-	j = 0;
-	tmp_file_cnt = get_or_set_tmp_file_cnt(0, 1);
-	while (!g_errno)
+	set_signal(HEREDOC);
+	pid = fork();
+	if (pid == 0)
 	{
-		delimiter_token = find_delimiter_token(cmd, &i, &j);
-		if (delimiter_token == NULL)
-			break ;
-		heredoc_one(delimiter_token);
-		tmp_file_cnt = get_or_set_tmp_file_cnt(0, 0);
-		get_or_set_tmp_file_cnt(tmp_file_cnt + 1, 1);
+		i = 0;
+		j = 0;
+		tmp_file_cnt = 0;
+		while (1)
+		{
+			delimiter_token = find_delimiter_token(cmd, &i, &j);
+			if (delimiter_token == NULL)
+				break ;
+			heredoc_one(delimiter_token, tmp_file_cnt);
+			tmp_file_cnt += 1;
+		}
+		exit(EXIT_SUCCESS);
 	}
+	set_signal(IGNORE);
+}
+
+int	wait_heredoc(void)
+{
+	int	status;
+
+	status = 0;
+	waitpid(-1, &status, 0);
+	if (WIFSIGNALED(status))
+	{
+		printf("\n");
+		g_errno = 1;
+		return (1);
+	}
+	return (0);
+}
+
+int	heredoc(t_cmd *cmd)
+{
+	int	exit_code;
+
+	heredoc_in_child_process(cmd);
+	exit_code = wait_heredoc();
+	set_signal(SHELL);
+	if (exit_code == EXIT_SUCCESS)
+		change_delimiter_to_file_name(cmd);
+	return (exit_code);
 }

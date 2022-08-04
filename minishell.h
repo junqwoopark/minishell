@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 18:22:23 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:36:53 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,15 @@ typedef struct s_cmd {
 extern int	g_errno;
 
 // ./heredoc/heredoc.c
-void	heredoc_all(t_cmd *cmd);
+int		heredoc(t_cmd *cmd);
 
 // ./heredoc/heredoc_utils.c
-char	*get_tmp_file_path(void);
-size_t	get_or_set_tmp_file_cnt(size_t x, int option);
+void	change_delimiter_to_file_name(t_cmd *cmd);
+char	*get_tmp_file_path(size_t tmp_file_cnt);
+void	clear_file(int fd, char *tmp_file_path, size_t tmp_file_cnt);
 
 // ./heredoc/unlink.c
-void	unlink_all(void);
+void	unlink_all(t_cmd *cmd);
 
 // free.c
 void	free_token(t_token **token);
@@ -96,6 +97,7 @@ t_token	*parse(char *input, t_env *envp_copy);
 // ./parser/parse_utils.c
 int		is_valid_quote(char *input);
 void	init_in_quote(char *input, char *in_quote);
+char	*get_env_return_null(t_env *envp_copy, char *key);
 
 // ./parser/token_utils.c
 size_t	get_token_size(char *input, char *is_in_quote);
@@ -104,8 +106,8 @@ t_token	*label_token(t_token *token);
 int		is_token_error(t_token *token);
 
 // ./parser/expand_utils.c
-char	*get_env_with_find_key(char **str, t_env *envp_copy);
-char	*get_env_expanded_str(char **str, t_env *envp_copy);
+char	*get_env_with_find_key(char **str, t_env *envp_copy, int in_quote);
+char	*get_env_expanded_str(char **str, t_env *envp_copy, int in_quote);
 char	*get_squote_expanded_str(char **str);
 char	*get_str_stop_at_quote_and_dollar(char **str, int in_quote);
 void	skip_dquote_and_set_in_quote(char **str, int *in_quote);
@@ -143,6 +145,7 @@ void	exit_with_err(char *str1, char *str2, int exit_code, int to_exit);
 void	exit_with_err_second(char *str1, char *str2, char *str3, int exit_code);
 void	print_err(char *s1, char *s2, char *s3);
 void	print_token_error(char *error_token);
+int		return_with_err(char *str1, char *str2, char *str3, int exit_code);
 
 // exec.c
 void	exec(t_cmd *cmd);
@@ -156,8 +159,8 @@ char	*get_cmd_path(char *path[], t_cmd *cmd);
 void	init_pipe(int *read_pipe, int *write_pipe);
 void	update_pipe(int *read_pipe, int *write_pipe, int i, int cnt_of_cmd);
 // ./exec/redirect_utils.c
-void	redirect_in(t_cmd *cmd, int to_exit);
-void	redirect_out(t_cmd *cmd, int to_exit);
+int		redirect_in(t_cmd *cmd);
+int		redirect_out(t_cmd *cmd);
 // ./exec/run_utils.c
 int		is_builtin(t_cmd *cmd);
 void	run_builtin(t_cmd *cmd);
@@ -195,5 +198,6 @@ void	ft_cd(t_cmd *cmd);
 
 // exit.c
 void	ft_exit(t_cmd *cmd);
+void	ft_exit_multiple_cmd(t_cmd *cmd);
 
 #endif

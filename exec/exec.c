@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 18:57:20 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:16:09 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 void	wait_child_process(void)
 {
-	while (wait(&g_errno) != -1)
+	int	status;
+
+	status = 0;
+	while (wait(&status) != -1)
 		;
-	if (WIFEXITED(g_errno))
-		g_errno = WEXITSTATUS(g_errno);
-	else if (WIFSIGNALED(g_errno))
+	if (WIFEXITED(status))
+		g_errno = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
 	{
-		if (WTERMSIG(g_errno) == SIGINT)
+		if (WTERMSIG(status) == SIGINT)
 			printf("^C\n");
-		else if (WTERMSIG(g_errno) == SIGQUIT)
-			printf("^\\");
-		g_errno = WTERMSIG(g_errno) + 128;
+		else if (WTERMSIG(status) == SIGQUIT)
+			printf("^\\Quit: 3\n");
+		g_errno = WTERMSIG(status) + 128;
 	}
 }
 
@@ -34,10 +37,10 @@ void	exec_single_builtin_cmd(t_cmd *cmd)
 
 	fd[0] = dup(STDIN_FILENO);
 	fd[1] = dup(STDOUT_FILENO);
-	redirect_in(cmd, 0);
-	redirect_out(cmd, 0);
-	if (!g_errno)
+	if (redirect_in(cmd) == 0 && redirect_out(cmd) == 0)
 		run_builtin(cmd);
+	else
+		g_errno = errno;
 	ft_dup2(fd[0], STDIN_FILENO);
 	ft_dup2(fd[1], STDOUT_FILENO);
 }
@@ -48,10 +51,15 @@ void	exec_multiple_cmd_in_child_process(t_cmd *cmd)
 	ft_close(cmd->write_pipe[READ]);
 	ft_dup2(cmd->read_pipe[READ], STDIN_FILENO);
 	ft_dup2(cmd->write_pipe[WRITE], STDOUT_FILENO);
-	redirect_in(cmd, 1);
-	redirect_out(cmd, 1);
-	if (cmd->argc != 0)
-		run_cmd(cmd);
+	if (redirect_in(cmd) == 0 && redirect_out(cmd) == 0)
+	{
+		if (cmd->argc != 0)
+			run_cmd(cmd);
+		else
+			exit(0);
+	}
+	else
+		g_errno = errno;
 	exit(g_errno);
 }
 

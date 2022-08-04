@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 13:36:09 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/03 17:00:26 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:20:42 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ void	cd_home(t_cmd *cmd)
 			exit_with_err("cd", "HOME not set", 1, 0);
 		else if (chdir(path) == -1)
 			exit_with_err_second("cd", path, "No such file or directory", 1);
+		else
+			g_errno = 0;
 	}
-	else if (cmd->argv[1][1] == '~')
-		exit_with_err_second("cd", path, "No such file or directory", 1);
 	else
 	{
 		if (chdir(getenv("HOME")) == -1)
 			exit_with_err_second("cd", path, "No such file or directory", 1);
+		else
+			g_errno = 0;
 	}
 }
 
@@ -54,17 +56,15 @@ void	ft_cd(t_cmd *cmd)
 {
 	char	*path;
 
-	if (cmd->argv[1] != NULL && cmd->argv[1][0]
-		!= '~' && cmd->argv[1][0] != '$')
+	if (cmd->argv[1] != NULL)
 	{
 		path = cmd->argv[1];
 		if (chdir(path) == -1)
-			exit_with_err_second("cd", path, "No such file or directory", 1);
+			exit_with_err_second("cd", path, strerror(errno), 1);
+		else
+			g_errno = 0;
 		set_pwd(cmd->envp_copy);
 	}
-	else if (cmd->argv[1] == NULL
-		|| (cmd->argv[1][0] == '~' && cmd->argv[1][1] == '\0'))
+	else if (cmd->argv[1] == NULL)
 		cd_home(cmd);
-	else if (cmd->argv[1][0] == '~')
-		exit_with_err("cd", "No such file or directory", 1, 0);
 }

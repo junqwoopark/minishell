@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chukim <chukim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:29:01 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/01 14:42:58 by chukim           ###   ########.fr       */
+/*   Updated: 2022/08/04 15:17:09 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	ft_echo(t_cmd *cmd)
 	}
 	if (flag != 1)
 		printf("\n");
+	g_errno = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:02:49 by junkpark          #+#    #+#             */
-/*   Updated: 2022/08/03 19:18:52 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:05:13 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ void	run_builtin(t_cmd *cmd)
 		return ;
 }
 
+void	run_builtin_multiple_cmd(t_cmd *cmd)
+{
+	if (ft_strcmp(cmd->argv[0], "cd") == 0)
+		ft_cd(cmd);
+	else if (ft_strcmp(cmd->argv[0], "echo") == 0)
+		ft_echo(cmd);
+	else if (ft_strcmp(cmd->argv[0], "pwd") == 0)
+		ft_pwd(cmd);
+	else if (ft_strcmp(cmd->argv[0], "export") == 0)
+		ft_export(cmd);
+	else if (ft_strcmp(cmd->argv[0], "unset") == 0)
+		ft_unset(cmd);
+	else if (ft_strcmp(cmd->argv[0], "env") == 0)
+		ft_env(cmd);
+	else if (ft_strcmp(cmd->argv[0], "exit") == 0)
+		ft_exit_multiple_cmd(cmd);
+	else
+		return ;
+}
+
 void	run_cmd(t_cmd *cmd)
 {
 	char	*cmd_path;
@@ -52,7 +72,7 @@ void	run_cmd(t_cmd *cmd)
 
 	if (is_builtin(cmd))
 	{
-		run_builtin(cmd);
+		run_builtin_multiple_cmd(cmd);
 		exit(g_errno);
 	}
 	env_path = get_env_path(cmd->envp_copy_arr);
