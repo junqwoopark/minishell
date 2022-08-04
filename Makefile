@@ -6,7 +6,7 @@
 #    By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 10:31:15 by chukim            #+#    #+#              #
-#    Updated: 2022/08/04 16:41:48 by junkpark         ###   ########.fr        #
+#    Updated: 2022/08/04 20:51:54 by junkpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS =	minishell.c \
 		./env/env_utils.c \
 		./exec/exec.c \
 		./exec/exec_utils.c \
+		./exec/exec_wait.c \
 		./exec/path_utils.c \
 		./exec/pipe_utils.c \
 		./exec/redirect_utils.c \

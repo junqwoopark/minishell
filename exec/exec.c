@@ -6,30 +6,11 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:32:50 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/04 18:16:09 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:59:49 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	wait_child_process(void)
-{
-	int	status;
-
-	status = 0;
-	while (wait(&status) != -1)
-		;
-	if (WIFEXITED(status))
-		g_errno = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-	{
-		if (WTERMSIG(status) == SIGINT)
-			printf("^C\n");
-		else if (WTERMSIG(status) == SIGQUIT)
-			printf("^\\Quit: 3\n");
-		g_errno = WTERMSIG(status) + 128;
-	}
-}
 
 void	exec_single_builtin_cmd(t_cmd *cmd)
 {
@@ -59,7 +40,7 @@ void	exec_multiple_cmd_in_child_process(t_cmd *cmd)
 			exit(0);
 	}
 	else
-		g_errno = errno;
+		g_errno = 1;
 	exit(g_errno);
 }
 
@@ -85,7 +66,7 @@ void	exec_multiple_cmd(t_cmd *cmd, size_t cnt_of_cmd)
 		i++;
 	}
 	set_signal(IGNORE);
-	wait_child_process();
+	wait_child_process(pid);
 }
 
 void	exec(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:00:30 by junkpark          #+#    #+#             */
-/*   Updated: 2022/08/04 15:10:17 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:30:06 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	redirect_in(t_cmd *cmd)
 		if (fd == -1)
 		{
 			print_err("minishell", cmd->token[i + 1].str, strerror(errno));
-			return (errno);
+			return (1);
 			break ;
 		}
 		ft_dup2(fd, STDIN_FILENO);
@@ -54,7 +54,7 @@ int	redirect_out(t_cmd *cmd)
 		if (fd == -1)
 		{
 			print_err("minishell", cmd->token[i + 1].str, strerror(errno));
-			return (errno);
+			return (1);
 			break ;
 		}
 		ft_dup2(fd, STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:28:49 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/04 18:36:53 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:52:14 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,8 @@ int		return_with_err(char *str1, char *str2, char *str3, int exit_code);
 void	exec(t_cmd *cmd);
 // ./exec/exec_utils.c
 size_t	get_cnt_of_cmd(t_cmd *cmd);
+// ./exec/exec_wait.c
+void	wait_child_process(pid_t pid);
 // ./exec/path_utils.c
 char	**get_env_path(char *envp[]);
 int		is_cmd_contain_slash(t_cmd *cmd);

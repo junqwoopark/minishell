@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:29:01 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/04 15:17:09 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:01:11 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	check_echo_option(char *str)
 {
 	size_t	i;
 
+	if (str == NULL)
+		return (0);
 	if (ft_strncmp(str, "-n", 2) != 0)
 		return (0);
 	i = 2;

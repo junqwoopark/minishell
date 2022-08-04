@@ -6,7 +6,7 @@
 /*   By: junkpark <junkpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:36:19 by chukim            #+#    #+#             */
-/*   Updated: 2022/08/04 15:28:36 by junkpark         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:53:52 by junkpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	add_or_update_env(char *str, t_env *envp)
 	}
 	add_env(envp, key_value[0], key_value[1]);
 	free(key_value);
-	g_errno = 0;
 }
 
 void	ft_export(t_cmd *cmd)
@@ -73,7 +72,10 @@ void	ft_export(t_cmd *cmd)
 		while (cmd->argv[i] != NULL)
 		{
 			if (is_vaild_export(cmd->argv[i]) != 0)
+			{
 				add_or_update_env(cmd->argv[i], cmd->envp_copy);
+				g_errno = 0;
+			}
 			else
 				exit_with_err_second("export", cmd->argv[i],
 					"not a valid identifier", 1);
